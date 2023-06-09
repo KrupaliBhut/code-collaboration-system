@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>repolist</title>
+  </head>
+  <body>
+    <h3>Repository List</h3>
+    <ul>
+      <% repositories.forEach((repository)=> { %>
+      <li><%= repository.name %></li>
+      <li>Public: <%= repository.isPublic ? 'Yes' : 'No' %></li>
+      <% if (!repository.isPublic) { %>
+      <li>Private Value: <%repository.privateValue %></li>
+      <% } %>
+      <br />
+      <% }) %>
+    </ul>
+  </body>
+</html>

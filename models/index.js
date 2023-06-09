@@ -48,6 +48,16 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.users = require("../models/users")(sequelize, DataTypes);
+db.repositorys = require("../models/reposss")(sequelize, DataTypes);
+db.files = require("../models/file")(sequelize, DataTypes);
+db.branches = require("../models/branch")(sequelize, DataTypes);
+
+db.users.hasMany(db.repositorys, { foreignKey: "userId" });
+db.repositorys.belongsTo(db.users);
+
+// db.files.hasMany(db.repositorys, { foreignKey: "repositoryId" });
+// db.repositorys.belongsTo(db.files);
+
 db.sequelize
   .sync({ force: false })
   .then(() => {

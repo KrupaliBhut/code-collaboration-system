@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      #logoutbtn {
+        /* border-radius: blue; */
+        border-radius: 30px solid;
+
+        color: white;
+      }
+      #deleterepo {
+        margin-left: 990px;
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <form method="post" action="/repos">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item .me-5">
+                <a class="nav-link" href='#'>Logout</a>
+              </li> -->
+            </ul>
+          </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" id="logoutbtn">
+              <a class="nav-link" href="/auth/signout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <a type="button" href="/repocreate" class="btn btn-primary"
+        >New Repository</a
+      >
+      <!-- <a id="deleterepo" class="btn btn-primary float-right" type="submit">
+        Delete Repository
+      </a> -->
+      <h3>Repository List</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Repo Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      </table>
+    </form>
+  </body>
+  <script>
+    async function confirmation(id) {
+      if (confirm("Are you sure to delete this data..?")) {
+        axios.delete(`/repodelete/${id}`).then(function (response) {
+          return "data deleted";
+        });
+      } else {
+        alert("not deleted");
+      }
+      location.assign("/repos");
+    }
+    const FetchRepo = async () => {
+      const data = await fetch("/repos");
+      const results = await data.json();
+      const AllRepos = results.repos;
+      let html = ``;
+      AllRepos.forEach((element, i) => {
+        let htmlSegmnt = `
+        <ul>
+       <tbody>
+        <tr>
+      <td><a href="/tabs/${element.id}">${element.name}</a></td>
+      <td><button onclick="confirmation(${element.id})">Delete</button></td>
+      </tr>
+
+     </tbody>
+    </ul>
+        `;
+        html += htmlSegmnt;
+      });
+      let container = document.querySelector(".table");
+      container.innerHTML = html;
+    };
+    FetchRepo();
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</html>
