@@ -28,5 +28,40 @@ let createfile = async (req, res) => {
     res.status(500).send("error while uploading file");
   }
 };
+// let filelist = async (req, res) => {
+//   try {
+//     console.log("<<hello filelist");
+//     const listfile = await File.findAll();
+//     console.log("<<repos listfile", listfile);
+//     res.status(200).json({
+//       repos: listfile,
+//     });
+//   } catch (err) {
+//     console.log("error", err);
+//   }
+// };
+let filelist = async (req, res) => {
+  try {
+    console.log("<<hello repos");
+    const repositories = await File.findAll();
+    console.log("<<repos repositories", repositories);
+    res.status(200).json({
+      repos: repositories,
+    });
+  } catch (err) {
+    console.log("error", err);
+  }
+};
 
-module.exports = { files, upload, createfile };
+let filedelete = async (req, res) => {
+  try {
+    console.log("<<<<<<<<<<<file delete call");
+    const deletefile = await File.destroy({
+      where: { id: req.params.id },
+    });
+    return deletefile;
+  } catch (err) {
+    throw err;
+  }
+};
+module.exports = { files, upload, createfile, filelist, filedelete };

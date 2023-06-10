@@ -51,12 +51,16 @@ db.users = require("../models/users")(sequelize, DataTypes);
 db.repositorys = require("../models/reposss")(sequelize, DataTypes);
 db.files = require("../models/file")(sequelize, DataTypes);
 db.branches = require("../models/branch")(sequelize, DataTypes);
+db.issues = require("../models/issuesss")(sequelize, DataTypes);
+db.collabs = require("../models/collaboratorss")(sequelize, DataTypes);
 
-db.users.hasMany(db.repositorys, { foreignKey: "userId" });
+// db.users.hashOne(db.repositorys, { foreignKey: "userId" });
 db.repositorys.belongsTo(db.users);
 
-// db.files.hasMany(db.repositorys, { foreignKey: "repositoryId" });
-// db.repositorys.belongsTo(db.files);
+db.repositorys.hasMany(db.issues, { foreignKey: "repositoryId" });
+db.issues.belongsTo(db.repositorys, { foreignKey: "repositoryId" });
+// db.repositorys.hasMany(db.issues, { foreignKey: "id" });
+// db.issues.belongsTo(db.repository, { foreignKey: "repositoryId" });
 
 db.sequelize
   .sync({ force: false })

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>repository</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+     
+
+  
+  
+  .card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+  }
+  .card-registration .select-arrow {
+  top: 13px;
+  }
+  #backbtn{
+    background-color: blue;
+    border-color: blue;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+  }
+    </style>
+</head>
+<body> <div class="row" id="updateuser" style="">
+    <form method="post" action="/issues/<%= issue.id %>" id="edit-issue-form" enctype="multipart/form-data">
+        <a id="backbtn" href="#" class="bi bi-arrow-return-left">back</a>
+          <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Create Issues</h3>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <label class="form-label" for="title">title</label>
+                              <input type="text" id="uptitle" name="title" value="<%= issue[0].title%>" class="form-control form-control-lg" />
+                            
+                            </div>
+          
+                          </div>
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <label class="form-label" for="description">description</label>
+                              <input type="text" id="updescription" name="description" value="<%= issue[0].description%>" class="form-control form-control-lg" />
+                            </div>
+                          </div>
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <label for="assignto" class="form-label"> assignto:</label>
+                              <input type="text" id="upassignto" name="assignto" value="<%= issue[0].assignto%>"  />
+                            </div>
+                          </div>
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <label class="form-label" for="labels">labels</label>
+                              <input type="text" id="uplabels" name="labels" class="form-control form-control-lg" value="<%= issue[0].labels%>" />
+                            </div>
+                          </div>
+                          
+
+                          <div class="mt-4 pt-2">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Submit" onclick="return addrepo()"/>
+                          </div>
+                        </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        
+        </form>
+      </div>
+</body>
+<script>
+    // document.getElementById("edit-issue-form").addEventListener('submit', async(event)=> {
+    //     event.preventDefault();
+    //     const form = event.target;
+    //     const id = form.getAttribute('action').split('/').pop();
+    //     const formData = new Formdata(form);
+    //     try {
+    //         const response = await fetch('issues/${id}', {
+    //             method: 'post',
+    //             body: formData
+            
+    //         });
+    //         if(!response.ok) {
+    //             throw new Error('failed to fetch update issues');
+    //         }
+    //         console.log("issue updated");
+    //     }catch (error) {
+    //         console.error(error.message);
+    //     }
+    // });
+ 
+    const updateUser = async (id)=>{
+    alert("hello")
+      var modal1 = document.getElementById("updateuser");
+      modal1.style.visibility = "visible";
+      const res = await axios.get(`/products/${id}`);
+      const user = res.data;
+      console.log('user<<',user);
+      document.getElementById('uptitle').value = user.title;
+      document.getElementById('updescription').value = user.description;
+      document.getElementById('upassignto').value = user.assignto;
+      document.getElementById('uplabels').value = user.lables;
+      const updateForm = document.querySelector('#updateuser');
+      updateForm.addEventListener('submit', async (e)=>{
+          e.preventDefault()
+          const res1 = await axios.put(`/issues/${id}`, {
+              name: document.getElementById('uptitle').value,
+              description: document.getElementById('updescription').value,
+              price: document.getElementById('upassignto').value,
+            cname: document.getElementById('uplabels').value,
+          })
+          document.querySelector('.model-container').style.visibility = "hidden";
+          console.log(res1);
+      })
+  }
+      </script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</script>
+</html>

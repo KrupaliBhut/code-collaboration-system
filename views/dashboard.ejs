@@ -89,7 +89,6 @@
       <td><a href="/tabs/${element.id}">${element.name}</a></td>
       <td><button onclick="confirmation(${element.id})">Delete</button></td>
       </tr>
-
      </tbody>
     </ul>
         `;
@@ -99,6 +98,7 @@
       container.innerHTML = html;
     };
     FetchRepo();
+    console.log("<<<<<<<<<<<<<<<<<<<<<<<", document.cookie);
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </html>

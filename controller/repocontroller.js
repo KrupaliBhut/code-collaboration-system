@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ok } = require("assert");
 const Repository = db.repositorys;
-
+const Issues = db.issues;
 // let repos = async (req, res) => {
 //   try {
 //     const repositories = await Repository.findAll();
@@ -64,16 +64,29 @@ let repodelete = async (req, res) => {
 let tabs = async (req, res) => {
   console.log("tab<<<<<<<<<<<");
   const id = req.params.id;
+
   try {
     const repository = await Repository.findOne({ where: { id } });
     if (repository) {
+      console.log("hello lkhj");
       res.render("threetabs", { repository });
     } else {
       res.status(404).send("Repository not found");
     }
+    console.log("repository<<<", repository);
   } catch (err) {
     console.log("retriving error", err);
     res.status(500).send("error retriewing");
   }
 };
-module.exports = { repos, repolist, repocreate, repodelete, tabs };
+let repoissu = async (req, res) => {
+  const id = req.params.id;
+  const repository = await Issues.findOne({
+    where: { id: id },
+    include: {
+      model: Repository,
+    },
+  });
+  res.json(Repository);
+};
+module.exports = { repos, repolist, repocreate, repodelete, tabs, repoissu };

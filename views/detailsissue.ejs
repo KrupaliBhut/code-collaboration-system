@@ -21,24 +21,17 @@
   </head>
   <body>
     <%- include("threetabs") -%>
-    <a type="button" href="/createbranch" class="btn btn-primary">
-      Create Branch</a
+    <a type="button" href="/issuecreate" class="btn btn-primary">
+      Create Issue</a
     >
-    <a
-      id="deleterepo"
-      href="/upload"
-      class="btn btn-primary float-right"
-      type="submit"
-    >
-      Upload File
-    </a>
 
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">filename</th>
-          <th scope="col">path</th>
-          <th scope="col">content</th>
+          <th scope="col">title</th>
+          <th scope="col">description</th>
+          <th scope="col">assignto</th>
+          <th scope="col">labels</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -47,16 +40,16 @@
   <script>
     async function confirmation(id) {
       if (confirm("Are you sure to delete this data..?")) {
-        axios.delete(`/filedelete/${id}`).then(function (response) {
+        axios.delete(`/issuedelete/${id}`).then(function (response) {
           return "data deleted";
         });
       } else {
         alert("not deleted");
       }
-      location.assign("/code");
+      location.assign("/renderissues");
     }
     const FetchRepo = async () => {
-      const data = await fetch("/filelist");
+      const data = await fetch("/issue");
       const results = await data.json();
       const AllRepos = results.repos;
       let html = ``;
@@ -65,13 +58,11 @@
         <ul>
        <tbody>
         <tr>
-        <th>filename</th>
-        <th>path</th>
-        <th>content</th>
+        <th>title</th>
+        
       </tr>
-      <td>${element.filename}</td>
-      <td>${element.path}</td>
-      <td>${element.content}</td>
+        <tr>
+            <td><a href="/issuedetails/${element.id}">${element.title}</a></td>
       <td><button onclick="confirmation(${element.id})">Delete</button></td>
       </tr>
 
@@ -85,5 +76,4 @@
     };
     FetchRepo();
   </script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </html>
