@@ -7,15 +7,17 @@ const {
   repolist,
   repocreate,
   repodelete,
-  tabs,repoissu
+  tabs,
+  repoissu,dashboard,
 } = require("../controller/repocontroller");
 const validateUser = require("../middleware/authtoken");
 // router.get("/repos", validateUser, userData.repos);
-router.route("/repos", validateUser).get(repos);
+router.route("/repos").get(repos);
 router.route("/repocreate").get(repocreate);
 router.route("/repolist").post(repolist);
 router.route("/repodelete/:id").delete(repodelete);
 router.route("/tabs/:id").get(tabs);
 
+router.route("/dashboard").get(dashboard);
 router.route("/repoissu/:id").get(repoissu);
 module.exports = router;

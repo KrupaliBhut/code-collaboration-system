@@ -68,13 +68,11 @@
   <script>
     async function confirmation(id) {
       if (confirm("Are you sure to delete this data..?")) {
-        axios.delete(`/repodelete/${id}`).then(function (response) {
-          return "data deleted";
-        });
+        axios.delete(`/repodelete/${id}`).then(function (response) {});
       } else {
         alert("not deleted");
       }
-      location.assign("/repos");
+      location.reload();
     }
     const FetchRepo = async () => {
       const data = await fetch("/repos");

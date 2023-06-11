@@ -26,6 +26,7 @@ let repos = async (req, res) => {
     res.status(200).json({
       repos: repositories,
     });
+    res.render("dashboard");
   } catch (err) {
     console.log("error", err);
   }
@@ -33,9 +34,20 @@ let repos = async (req, res) => {
 let repocreate = async (req, res) => {
   res.render("createrepo");
 };
+let dashboard = async (req, res) => {
+  res.render("dashboard");
+};
 let repolist = async (req, res) => {
   console.log("<<<<<<<<<<<<<<<<<<<createrepo call");
-  const { name, description, isPublic, privateValue } = req.body;
+  // const { name, description, isPublic, privateValue } = req.body;
+  const token = req.headers.cookie;
+  console.log("token", token);
+  console.log("token", token);
+  const user = JSON.parse(
+    Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+  );
+  console.log("user.id", user.id);
+  const uid = user.id;
 
   try {
     await Repository.create({
@@ -43,8 +55,9 @@ let repolist = async (req, res) => {
       description: req.body.description,
       isPublic: req.body.isPublic,
       privateValue: req.body.privateValue,
+      userId: uid,
     });
-    res.render("createrepo");
+    res.redirect("/dashboard");
   } catch (err) {
     console.log("error while creating repo", err);
     res.status(500).send("error while creating repo");
@@ -89,4 +102,12 @@ let repoissu = async (req, res) => {
   });
   res.json(Repository);
 };
-module.exports = { repos, repolist, repocreate, repodelete, tabs, repoissu };
+module.exports = {
+  repos,
+  repolist,
+  repocreate,
+  repodelete,
+  tabs,
+  repoissu,
+  dashboard,
+};

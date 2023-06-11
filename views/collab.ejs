@@ -13,12 +13,33 @@
     />
   </head>
   <body>
-    <%- include("threetabs") -%>
+    <a type="button" href="/tabs/<%=id%>" class="btn btn-primary">
+      Back</a>
     <div class="input-group">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"   onChange='return change(this)'/>
+     
+        <input type="search" class="form-control rounded" placeholder="Search" oninput='change(this)'/>
         <button type="button" class="btn btn-outline-primary">search</button>
       </div>
       <div id="new"></div>
+      <div id ="list">
+        <table class="table">
+          <thead>
+            <th scope="col">UserName</th>
+            <th scope="col">Email Id</th>
+            <th scope="col">Action</th>
+          </thead>
+          <tbody>
+         <%for(i=0;i< coid.length;i ++) {%>
+          <td>
+            <%= coid[i].username %></td>
+         <td>   <%= coid[i].email %>
+          </td>
+          <td> <a href="/deletecollabs?repositoryId=<%=id%>&id=<%=coid[i].collas[0].id %>">Delete</a>
+          </td>
+          <% }%>
+        </tbody>
+        </table>
+      </div>
   </body>
   <script>
     </script>
@@ -36,13 +57,12 @@ var html= ``;
 AllRepos.forEach((element, i) => {
         let htmlSegmnt = ` <ul>
       ${element.username}
-      
+      <a href="/createcollabs?repositoryId=<%=id%>&userId=${element.id}">ADD</a>
     </ul>
         `;
         html += htmlSegmnt;
       });
       div_ele.innerHTML = html;
-      console.log("name.innerhtml<<<<<<",name.innerHTML);
 }
 </script>
   </script>

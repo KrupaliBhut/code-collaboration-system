@@ -20,7 +20,6 @@
     </style>
   </head>
   <body>
-    <%- include("threetabs") -%>
     <a type="button" href="/createbranch" class="btn btn-primary">
       Create Branch</a
     >
@@ -39,9 +38,18 @@
           <th scope="col">filename</th>
           <th scope="col">path</th>
           <th scope="col">content</th>
-          <th scope="col">Action</th>
+          <!-- <th scope="col">Action</th> -->
         </tr>
       </thead>
+      <tbody>
+      <% for(var i=0;i<datacode.length;i++){ %>
+        <tr>
+            <td><%=datacode[i].filename%></td>
+            <td><%=datacode[i].path%></td>
+            <td><%=datacode[i].content%></td>
+                   </tr>
+        <%}%>
+      </tbody>
     </table>
   </body>
   <script>
@@ -55,35 +63,35 @@
       }
       location.assign("/code");
     }
-    const FetchRepo = async () => {
-      const data = await fetch("/filelist");
-      const results = await data.json();
-      const AllRepos = results.repos;
-      let html = ``;
-      AllRepos.forEach((element, i) => {
-        let htmlSegmnt = `
-        <ul>
-       <tbody>
-        <tr>
-        <th>filename</th>
-        <th>path</th>
-        <th>content</th>
-      </tr>
-      <td>${element.filename}</td>
-      <td>${element.path}</td>
-      <td>${element.content}</td>
-      <td><button onclick="confirmation(${element.id})">Delete</button></td>
-      </tr>
+    // const FetchRepo = async () => {
+    //   const data = await fetch("/filelist");
+    //   const results = await data.json();
+    //   const AllRepos = results.repos;
+    //   let html = ``;
+    //   AllRepos.forEach((element, i) => {
+    //     let htmlSegmnt = `
+    //     <ul>
+    //    <tbody>
+    //     <tr>
+    //     <th>filename</th>
+    //     <th>path</th>
+    //     <th>content</th>
+    //   </tr>
+    //   <td>${element.filename}</td>
+    //   <td>${element.path}</td>
+    //   <td>${element.content}</td>
+    //   <td><button onclick="confirmation(${element.id})">Delete</button></td>
+    //   </tr>
 
-     </tbody>
-    </ul>
-        `;
-        html += htmlSegmnt;
-      });
-      let container = document.querySelector(".table");
-      container.innerHTML = html;
-    };
-    FetchRepo();
+    //  </tbody>
+    // </ul>
+    //     `;
+    //     html += htmlSegmnt;
+    //   });
+    //   let container = document.querySelector(".table");
+    //   container.innerHTML = html;
+    // };
+    // FetchRepo();
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </html>

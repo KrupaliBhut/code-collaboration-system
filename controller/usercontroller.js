@@ -5,7 +5,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Users = db.users;
 const SecreteKey = "krupali";
-
+let reg = async (req, res) => {
+  res.render("register");
+};
 let registration = async (req, res) => {
   try {
     const { username, email, password, confirmpassword } = req.body;
@@ -20,7 +22,7 @@ let registration = async (req, res) => {
         password: hash,
         confirmpassword: confirmpassword,
       });
-      res.render("register");
+      res.redirect("/login");
     }
   } catch (err) {
     console.log("error", err);
@@ -95,6 +97,6 @@ let log = async (req, res) => {
 module.exports = {
   registration,
   login,
-
+  reg,
   log,
 };

@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const File = db.files;
 const multer = require("multer");
-
+const Repository = db.repositorys;
 let files = async (req, res) => {
   res.render("code");
 };
@@ -64,4 +64,27 @@ let filedelete = async (req, res) => {
     throw err;
   }
 };
-module.exports = { files, upload, createfile, filelist, filedelete };
+let codedata = async (req, res) => {
+  console.log("Codedata<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+  const token = req.headers.cookie;
+  console.log("token", token);
+  console.log("token", token);
+  const user = JSON.parse(
+    Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+  );
+  console.log("user.id", user.id);
+  const uid = user.id;
+
+  const issues = await Repository.findAll({
+    where: { userId: uid, id: req.query.id },
+    include: {
+      model: File,
+    },
+  });
+  console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
+  console.log("filessss<", issues[0].files[0].id);
+  var datacode = issues[0].files;
+
+  res.render("code", { datacode });
+};
+module.exports = { files, upload, createfile, filelist, filedelete, codedata };

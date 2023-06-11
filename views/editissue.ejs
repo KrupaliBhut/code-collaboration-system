@@ -31,7 +31,7 @@
     </style>
 </head>
 <body> <div class="row" id="updateuser" style="">
-    <form method="post" action="/issues/<%= issue.id %>" id="edit-issue-form" enctype="multipart/form-data">
+    <form method="post" action="/issues?id=<%=issuesedit[0].id%>&repositoryId=<%=issuesedit[0].repositoryId%>" id="edit-issue-form" >
         <a id="backbtn" href="#" class="bi bi-arrow-return-left">back</a>
           <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
@@ -45,7 +45,7 @@
           
                             <div class="form-outline">
                               <label class="form-label" for="title">title</label>
-                              <input type="text" id="uptitle" name="title" value="<%= issue[0].title%>" class="form-control form-control-lg" />
+                              <input type="text" id="uptitle" name="title" value="<%= issuesedit[0].title%>" class="form-control form-control-lg" />
                             
                             </div>
           
@@ -54,22 +54,36 @@
           
                             <div class="form-outline">
                               <label class="form-label" for="description">description</label>
-                              <input type="text" id="updescription" name="description" value="<%= issue[0].description%>" class="form-control form-control-lg" />
+                              <input type="text" id="updescription" name="description" value="<%= issuesedit[0].description%>" class="form-control form-control-lg" />
                             </div>
                           </div>
                           <div class="col-md-6 mb-4">
           
                             <div class="form-outline">
-                              <label for="assignto" class="form-label"> assignto:</label>
-                              <input type="text" id="upassignto" name="assignto" value="<%= issue[0].assignto%>"  />
+                              assignto: 
+                              <select for="assignto"  name="assignto" class="form-label"> 
+                              <% for (i=0;i< allcollabs.length; i++) { console.log("forloop<<<<<<<<<") %>
+                                <% if( allcollabs[i].username == issuesedit[0].assignto) { console.log("xyz<<<<<<<<<") %>
+                              <option id="assignto" value="<%= allcollabs[i].username %>" selected><%= allcollabs[i].username %></option>
+                              <% } else {  %>
+                                <option id="assignto" value="<%= allcollabs[i].username %>"><%= allcollabs[i].username %></option>
+                                
+                                <% }} %>
+                            </select>
                             </div>
                           </div>
                           <div class="col-md-6 mb-4">
           
-                            <div class="form-outline">
-                              <label class="form-label" for="labels">labels</label>
-                              <input type="text" id="uplabels" name="labels" class="form-control form-control-lg" value="<%= issue[0].labels%>" />
-                            </div>
+                            Label :
+                                                        <select for="labels"  name="labels" class="form-label" multiple> 
+                             <% for (i=0;i< alllabel.length; i++) { %>
+                              <% if(alllabel[i].labels == issuesedit[0].labels) { %>
+                              <option id="labels" value="<%= alllabel[i].labels %>"selected><%= alllabel[i].labels %></option>
+                              <% }  else {%>
+                                <option id="labels" value="<%= alllabel[i].labels %>"><%= alllabel[i].labels %></option>
+
+                              <% }} %>
+                            </select>
                           </div>
                           
 

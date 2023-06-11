@@ -20,10 +20,11 @@
     </style>
   </head>
   <body>
-    <a type="button" href="/issuecreate" class="btn btn-primary">
-      Create Issue</a
-    >
-
+    <a type="button" href="/tabs/<%=id%>" class="btn btn-primary">
+      Back</a>
+    <a type="button" href="/issuecreate/?id=<%=id%>" class="btn btn-primary">
+      Create Issue</a>
+     
     <table class="table">
       <thead>
         <tr>
@@ -31,6 +32,7 @@
           <th scope="col">description</th>
           <th scope="col">assignto</th>
           <th scope="col">labels</th>
+          <th scope="col">Action</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -41,6 +43,8 @@
                 <td><%=data[i].description%></td>
                 <td><%=data[i].assignto%></td>
                 <td><%=data[i].labels%></td>
+                <td> <a href="/issuedelete?repositoryId=<%=id%>&id=<%=data[i].id %>">Delete</a>
+                  <td> <a href="/button?repositoryId=<%=id%>&id=<%=data[i].id %>">Edit</a>
 
             </tr>
             <%}%>
