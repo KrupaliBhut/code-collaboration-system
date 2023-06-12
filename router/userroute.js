@@ -6,6 +6,7 @@ const {
   login,
   log,
   reg,
+  logout,
 } = require("../controller/usercontroller");
 const UserController = require("../controller/usercontroller");
 
@@ -14,6 +15,7 @@ router.route("/registration").post(registration);
 // router.get("/registration", UserController.registration);
 router.route("/repos").post(login);
 router.route("/login").get(log);
+router.route("/logout").get(logout);
 // router.post("/login", UserController.login);
 // router.route("/profile", authenticateUser, profile);
 // router.route("/repos").get(repos);

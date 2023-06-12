@@ -8,7 +8,8 @@ const {
   repocreate,
   repodelete,
   tabs,
-  repoissu,dashboard,
+  repoissu,
+  dashboard,
 } = require("../controller/repocontroller");
 const validateUser = require("../middleware/authtoken");
 // router.get("/repos", validateUser, userData.repos);

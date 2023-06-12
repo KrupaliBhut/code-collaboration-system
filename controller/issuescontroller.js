@@ -12,6 +12,7 @@ let renderissues = async (req, res) => {
 };
 let issuecreate = async (req, res) => {
   var id = req.query.id;
+  console.log("iiiiiiiiiiiiiiiiiiiiiiiiii", id);
   const allcollabs = await Users.findAll({
     attributes: ["username", "email"],
     include: [
@@ -145,12 +146,13 @@ let editissue = async (req, res) => {
 };
 
 let issueData = async (req, res) => {
+  console.log("<<", req.header);
   const token = req.headers.cookie;
-  console.log("token", token);
   console.log("token", token);
   const user = JSON.parse(
     Buffer.from(token.split(".")[1], "base64").toString("utf-8")
   );
+  console.log("user<<<<", user);
   console.log("user.id", user.id);
   const uid = user.id;
 
@@ -160,7 +162,8 @@ let issueData = async (req, res) => {
       model: Issues,
     },
   });
-  console.log("issuessss<", issues[0].issuessses[0].id);
+  console.log("???????????issues", issues);
+
   var data = issues[0].issuessses;
   var id = req.query.id;
   res.render("issues", { data, id });

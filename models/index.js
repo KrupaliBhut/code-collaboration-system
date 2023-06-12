@@ -64,6 +64,9 @@ db.issues.belongsTo(db.repositorys, { foreignKey: "repositoryId" });
 db.repositorys.hasMany(db.files, { foreignKey: "repositoryId" });
 db.files.belongsTo(db.repositorys, { foreignKey: "repositoryId" });
 
+db.files.hasMany(db.repositorys, { foreignKey: "repositoryId" });
+db.repositorys.belongsTo(db.files, { foreignKey: "repositoryId" });
+
 db.users.hasMany(db.collabs, { foreignKey: "userId" });
 db.collabs.belongsTo(db.users, { foreignKey: "repositoryId" });
 db.sequelize

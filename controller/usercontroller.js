@@ -67,36 +67,30 @@ let login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid username or password" });
     }
-    const token = jwt.sign({ id: user.id }, SecreteKey);
+
+    const token = jwt.sign({ id: user.id }, "krupali");
     console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", token);
+    res.cookie("token", token, {});
     // res.json({ token });
-    res.render("dashboard");
+
+    res.render("dashboard", { token });
   } catch (err) {
     console.log("error", err);
   }
 };
+
 let log = async (req, res) => {
   res.render("login");
 };
-// let profile = async (req, res) => {
-//   res.json({ message: "you are authorized", user: req.user });
-// };
-// let repos = async (req, res) => {
-//   try {
-
-//     const repo = await Repository.findAll();
-//     repo.forEach((repository) => {
-//       console.log("<<<name", repository.name);
-//       repos.render("dashboard");
-//     });
-//   } catch (err) {
-//     console.log("error", err);
-//   }
-// };
+let logout = async (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/login");
+};
 
 module.exports = {
   registration,
   login,
   reg,
   log,
+  logout,
 };

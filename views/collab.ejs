@@ -30,12 +30,13 @@
           </thead>
           <tbody>
          <%for(i=0;i< coid.length;i ++) {%>
+          <tr>
           <td>
             <%= coid[i].username %></td>
-         <td>   <%= coid[i].email %>
-          </td>
+         <td>   <%= coid[i].email %></td>
+    
           <td> <a href="/deletecollabs?repositoryId=<%=id%>&id=<%=coid[i].collas[0].id %>">Delete</a>
-          </td>
+          </td></tr>
           <% }%>
         </tbody>
         </table>

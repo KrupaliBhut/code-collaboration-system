@@ -26,7 +26,7 @@ let repos = async (req, res) => {
     res.status(200).json({
       repos: repositories,
     });
-    res.render("dashboard");
+    // res.render("dashboard");
   } catch (err) {
     console.log("error", err);
   }
@@ -69,11 +69,13 @@ let repodelete = async (req, res) => {
     const deleterepo = await Repository.destroy({
       where: { id: req.params.id },
     });
-    return deleterepo;
+
+    res.redirect("/dashboard");
   } catch (err) {
     throw err;
   }
 };
+
 let tabs = async (req, res) => {
   console.log("tab<<<<<<<<<<<");
   const id = req.params.id;

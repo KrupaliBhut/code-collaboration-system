@@ -7,11 +7,17 @@ const {
   filelist,
   filedelete,
   codedata,
+  uploadfile,
+  filecreate,
 } = require("../controller/codecontrooler");
 
 router.route("/code").get(files);
+
 router.route("/upload").get(upload);
-router.route("/createfile").post(createfile);
+router.route("/createfile", uploadfile.single("path")).post(createfile);
+// router.route("/createfile").post(createfile);
+// router.route("/upfile").post(upfile);
+router.route("/filecreate").get(filecreate);
 router.route("/filelist").get(filelist);
 router.route("/codedata").get(codedata);
 router.route("/filedelete/:id").delete(filedelete);

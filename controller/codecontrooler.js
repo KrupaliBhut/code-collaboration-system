@@ -9,25 +9,38 @@ const Repository = db.repositorys;
 let files = async (req, res) => {
   res.render("code");
 };
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads");
+  },
+  filename: function (req, file, cb) {
+    const mimeExtension = {
+      "text/html": ".html",
+      " text/xml": ".xml",
+      "text/csv": ".csv",
+    };
+    cb(null, file.filename + "-" + mimeExtension(file.mimetype));
+  },
+});
+const uploadfile = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "text/html" ||
+      file.mimetype === "text/xml" ||
+      file.mimetype === "text/csv"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      req.fileError = "file formate is not valid";
+    }
+  },
+});
 let upload = async (req, res) => {
   res.render("fileupload");
 };
 
-let createfile = async (req, res) => {
-  console.log("<<<<<<<<createfile");
-  const { filename, path, content } = req.body;
-  try {
-    const file = await File.create({
-      filename: filename,
-      path: path,
-      content: content,
-    });
-    res.render("fileupload");
-  } catch (err) {
-    console.log("error while uploading file", err);
-    res.status(500).send("error while uploading file");
-  }
-};
 // let filelist = async (req, res) => {
 //   try {
 //     console.log("<<hello filelist");
@@ -52,7 +65,12 @@ let filelist = async (req, res) => {
     console.log("error", err);
   }
 };
-
+let filecreate = async (req, res) => {
+  var id = req.query.id;
+  console.log("idfile,,,,,,,,,,,,,,,,,,", id);
+  console.log("req.query.id.....................", req.query.id);
+  res.render("fileupload", { id });
+};
 let filedelete = async (req, res) => {
   try {
     console.log("<<<<<<<<<<<file delete call");
@@ -64,7 +82,27 @@ let filedelete = async (req, res) => {
     throw err;
   }
 };
+let createfile = async (req, res) => {
+  try {
+    console.log("...................................createfile");
+    const { filename, path, content } = req.body;
+    const file = await File.create({
+      filename: filename,
+      path: path,
+      content: content,
+      repositoryId: req.body.create,
+    });
+    console.log("{{{{{{{{{{{{{{{{{{{{{{", file);
+    var id = req.body.create;
+    res.redirect(`/codedata?id=${id}`);
+    // res.render("fileupload");
+  } catch (err) {
+    console.log("error while uploading file", err);
+    res.status(500).send("error while uploading file");
+  }
+};
 let codedata = async (req, res) => {
+  console.log("<<", req.header);
   console.log("Codedata<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
   const token = req.headers.cookie;
   console.log("token", token);
@@ -82,9 +120,18 @@ let codedata = async (req, res) => {
     },
   });
   console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
-  console.log("filessss<", issues[0].files[0].id);
+  // console.log("filessss<", issues[0].files[0].id);
   var datacode = issues[0].files;
-
-  res.render("code", { datacode });
+  var id = req.query.id;
+  res.render("code", { datacode, id });
 };
-module.exports = { files, upload, createfile, filelist, filedelete, codedata };
+module.exports = {
+  files,
+  upload,
+  createfile,
+  filelist,
+  filedelete,
+  codedata,
+  uploadfile,
+  filecreate,
+};
