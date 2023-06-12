@@ -1,5 +1,4 @@
 const express = require("express");
-const authenticateUser = require("../middleware/authtoken");
 const router = express.Router();
 const {
   registration,
@@ -8,11 +7,12 @@ const {
   reg,
   logout,
 } = require("../controller/usercontroller");
+const validateUser = require("../controller/uservalidator");
 const UserController = require("../controller/usercontroller");
-
+// router.get("/registration", reg);
+// router.post("/registration", validateUser, registration);
 router.route("/registration").get(reg);
 router.route("/registration").post(registration);
-// router.get("/registration", UserController.registration);
 router.route("/repos").post(login);
 router.route("/login").get(log);
 router.route("/logout").get(logout);

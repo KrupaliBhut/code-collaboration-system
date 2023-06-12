@@ -6,42 +6,54 @@ const Collabs = db.collabs;
 const Users = db.users;
 const Repository = db.repositorys;
 let pagecollabs = async (req, res) => {
-  var id = req.query.id;
-  // const coid = await Collabs.findAll({
-  //   where: { repositoryId: id },
-  // });
-  const coid = await Users.findAll({
-    attributes: ["username", "email"],
-    include: [
-      {
-        model: Collabs,
-        where: {
-          repositoryId: id,
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.id;
+    // const coid = await Collabs.findAll({
+    //   where: { repositoryId: id },
+    // });
+    const coid = await Users.findAll({
+      attributes: ["username", "email"],
+      include: [
+        {
+          model: Collabs,
+          where: {
+            repositoryId: id,
+          },
+          required: true,
+          raw: true,
         },
-        required: true,
-        raw: true,
-      },
-    ],
-  });
-  console.log("coid???????????????????", coid);
+      ],
+    });
+    console.log("coid???????????????????", coid);
 
-  res.render("collab", { id, coid });
+    res.render("collab", { id, coid });
+  } else {
+    res.redirect("/login");
+  }
 };
 let collab = async (req, res) => {
   console.log("<<<<<<<<<<<<colaab");
   try {
-    const { name } = req.query;
-    const users = await Users.findAll({
-      where: {
-        username: {
-          [Op.like]: `%${name}%`,
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      const { name } = req.query;
+      const users = await Users.findAll({
+        where: {
+          username: {
+            [Op.like]: `%${name}%`,
+          },
         },
-      },
-    });
-    console.log("user<<<", users);
-    res.status(200).json({
-      repos: users,
-    });
+      });
+      console.log("user<<<", users);
+      res.status(200).json({
+        repos: users,
+      });
+    } else {
+      res.redirect("/login");
+    }
     // res.json(users);
   } catch (err) {
     console.log(
@@ -52,16 +64,22 @@ let collab = async (req, res) => {
   }
 };
 let createcollabs = async (req, res) => {
-  var userId = req.query.userId;
-  var repositoryId = req.query.repositoryId;
-  console.log("req.query.userId.....", req.query.userId);
-  console.log("req.query.repositoryId.............", req.query.repositoryId);
-  const co = await Collabs.create({
-    userId: userId,
-    repositoryId: repositoryId,
-  });
-  console.log("co>>>>>>", co);
-  res.redirect(`/pagecollabs?id=${repositoryId}`);
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var userId = req.query.userId;
+    var repositoryId = req.query.repositoryId;
+    console.log("req.query.userId.....", req.query.userId);
+    console.log("req.query.repositoryId.............", req.query.repositoryId);
+    const co = await Collabs.create({
+      userId: userId,
+      repositoryId: repositoryId,
+    });
+    console.log("co>>>>>>", co);
+    res.redirect(`/pagecollabs?id=${repositoryId}`);
+  } else {
+    res.redirect("/login");
+  }
 };
 let deletecollabs = async (req, res) => {
   try {

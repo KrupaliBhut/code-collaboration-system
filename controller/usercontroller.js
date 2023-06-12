@@ -12,6 +12,7 @@ let registration = async (req, res) => {
   try {
     const { username, email, password, confirmpassword } = req.body;
     let finduser = await Users.findOne({ where: { email } });
+
     if (finduser) {
       console.log("email is already exist");
     } else {

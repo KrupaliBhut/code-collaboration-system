@@ -20,12 +20,18 @@ const Issues = db.issues;
 // };
 let repos = async (req, res) => {
   try {
-    console.log("<<hello repos");
-    const repositories = await Repository.findAll();
-    console.log("<<repos repositories", repositories);
-    res.status(200).json({
-      repos: repositories,
-    });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      console.log("<<hello repos");
+      const repositories = await Repository.findAll();
+      console.log("<<repos repositories", repositories);
+      res.status(200).json({
+        repos: repositories,
+      });
+    } else {
+      res.redirect("/login");
+    }
     // res.render("dashboard");
   } catch (err) {
     console.log("error", err);
@@ -35,7 +41,13 @@ let repocreate = async (req, res) => {
   res.render("createrepo");
 };
 let dashboard = async (req, res) => {
-  res.render("dashboard");
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    res.render("dashboard");
+  } else {
+    res.redirect("/login");
+  }
 };
 let repolist = async (req, res) => {
   console.log("<<<<<<<<<<<<<<<<<<<createrepo call");
@@ -50,14 +62,20 @@ let repolist = async (req, res) => {
   const uid = user.id;
 
   try {
-    await Repository.create({
-      name: req.body.name,
-      description: req.body.description,
-      isPublic: req.body.isPublic,
-      privateValue: req.body.privateValue,
-      userId: uid,
-    });
-    res.redirect("/dashboard");
+    var tokens = req.headers.cookie;
+
+    if (tokens) {
+      await Repository.create({
+        name: req.body.name,
+        description: req.body.description,
+        isPublic: req.body.isPublic,
+        privateValue: req.body.privateValue,
+        userId: uid,
+      });
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/login");
+    }
   } catch (err) {
     console.log("error while creating repo", err);
     res.status(500).send("error while creating repo");
@@ -81,14 +99,20 @@ let tabs = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const repository = await Repository.findOne({ where: { id } });
-    if (repository) {
-      console.log("hello lkhj");
-      res.render("threetabs", { repository });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      const repository = await Repository.findOne({ where: { id } });
+      if (repository) {
+        console.log("hello lkhj");
+        res.render("threetabs", { repository });
+      } else {
+        res.status(404).send("Repository not found");
+      }
+      console.log("repository<<<", repository);
     } else {
-      res.status(404).send("Repository not found");
+      res.redirect("/login");
     }
-    console.log("repository<<<", repository);
   } catch (err) {
     console.log("retriving error", err);
     res.status(500).send("error retriewing");

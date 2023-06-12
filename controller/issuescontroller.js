@@ -11,78 +11,108 @@ let renderissues = async (req, res) => {
   res.render("issues");
 };
 let issuecreate = async (req, res) => {
-  var id = req.query.id;
-  console.log("iiiiiiiiiiiiiiiiiiiiiiiiii", id);
-  const allcollabs = await Users.findAll({
-    attributes: ["username", "email"],
-    include: [
-      {
-        model: Collabs,
-        where: {
-          repositoryId: id,
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.id;
+    console.log("iiiiiiiiiiiiiiiiiiiiiiiiii", id);
+    const allcollabs = await Users.findAll({
+      attributes: ["username", "email"],
+      include: [
+        {
+          model: Collabs,
+          where: {
+            repositoryId: id,
+          },
+          required: true,
+          raw: true,
         },
-        required: true,
-        raw: true,
-      },
-    ],
-  });
-  const alllabel = await Labels.findAll({});
-  console.log("allcolaabs list,............ ", allcollabs);
-  console.log("alllabel list,............ ", alllabel);
-  console.log("req.query.id.....................", req.query.id);
-  res.render("createissue", { id, allcollabs, alllabel });
+      ],
+    });
+    const alllabel = await Labels.findAll({});
+    console.log("allcolaabs list,............ ", allcollabs);
+    console.log("alllabel list,............ ", alllabel);
+    console.log("req.query.id.....................", req.query.id);
+    res.render("createissue", { id, allcollabs, alllabel });
+  } else {
+    res.redirect("/login");
+  }
 };
 let label = async (req, res) => {
-  var id = req.query.id;
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.id;
 
-  console.log("alllabel list,............ ", alllabel);
+    console.log("alllabel list,............ ", alllabel);
 
-  res.render("createissue", { alllabel });
+    res.render("createissue", { alllabel });
+  } else {
+    res.redirect("/login");
+  }
 };
 let issue = async (req, res) => {
   try {
-    console.log("<<hello issues");
-    const issues = await Issues.findAll();
-    console.log("<<repos issues", issues);
-    res.status(200).json({
-      repos: issues,
-    });
-    console.log("issues<<<<<", { issues });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      console.log("<<hello issues");
+      const issues = await Issues.findAll();
+      console.log("<<repos issues", issues);
+      res.status(200).json({
+        repos: issues,
+      });
+      console.log("issues<<<<<", { issues });
+    } else {
+      res.redirect("/login");
+    }
   } catch (err) {
     console.log("error", err);
   }
 };
 let tabss = async (req, res) => {
-  console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-  const repositoryId = req.params.id;
-  console.log("<<req.params.id", req.params.id);
-  const issues = await Issues.findAll({});
-  //   res.render("issues");
-  //   renderissues.json(issues);
-  console.log("issues<", issues);
-  res.status(200).json({
-    repos: issues,
-  });
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    const repositoryId = req.params.id;
+    console.log("<<req.params.id", req.params.id);
+    const issues = await Issues.findAll({});
+    //   res.render("issues");
+    //   renderissues.json(issues);
+    console.log("issues<", issues);
+    res.status(200).json({
+      repos: issues,
+    });
+  } else {
+    res.redirect("/login");
+  }
 };
 let issues = async (req, res) => {
   try {
-    console.log(" insert issues<<<<<<<<<<<<", req.body);
-    console.log(" insert issues req.query<<<<<<<<<<<<", req.query);
-    var labels = req.body.labels;
-    for (var i = 0; i < labels.length; i++) {
-      const issues = await Issues.create({
-        title: req.body.title,
-        description: req.body.description,
-        assignto: req.body.assignto,
-        labels: labels[i],
-        repositoryId: req.body.create,
-      });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      console.log(" insert issues<<<<<<<<<<<<", req.body);
+      console.log(" insert issues req.query<<<<<<<<<<<<", req.query);
+      var labels = req.body.labels;
+      for (var i = 0; i < labels.length; i++) {
+        const issues = await Issues.create({
+          title: req.body.title,
+          description: req.body.description,
+          assignto: req.body.assignto,
+          labels: labels[i],
+          repositoryId: req.body.create,
+        });
+      }
+      var id = req.body.create;
+      // res.redirect("/issueData");
+      // res.render("issues", { id });
+      res.redirect(`/issueData?id=${id}`);
+      console.log("issues created", { issues });
+    } else {
+      res.redirect("/login");
     }
-    var id = req.body.create;
-    // res.redirect("/issueData");
-    // res.render("issues", { id });
-    res.redirect(`/issueData?id=${id}`);
-    console.log("issues created", { issues });
   } catch (err) {
     console.log("error while creating issue:", err);
   }
@@ -101,44 +131,56 @@ let issuedelete = async (req, res) => {
   }
 };
 let button = async (req, res) => {
-  var id = req.query.id;
-  var repositoryId = req.query.repositoryId;
-  console.log("id>>>>>>>>>>>>>>>>>>>>>>", id);
-  const allcollabs = await Users.findAll({
-    attributes: ["username", "email"],
-    include: [
-      {
-        model: Collabs,
-        where: {
-          repositoryId: repositoryId,
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.id;
+    var repositoryId = req.query.repositoryId;
+    console.log("id>>>>>>>>>>>>>>>>>>>>>>", id);
+    const allcollabs = await Users.findAll({
+      attributes: ["username", "email"],
+      include: [
+        {
+          model: Collabs,
+          where: {
+            repositoryId: repositoryId,
+          },
+          required: true,
+          raw: true,
         },
-        required: true,
-        raw: true,
-      },
-    ],
-  });
-  const alllabel = await Labels.findAll({});
-  const issuesedit = await Issues.findAll({ where: { id: id } });
-  console.log("issuesedit>>>>>>>>>>>>>>>>>>>>>>", issuesedit[0].assignto);
-  res.render("editissue", { id, issuesedit, allcollabs, alllabel });
+      ],
+    });
+    const alllabel = await Labels.findAll({});
+    const issuesedit = await Issues.findAll({ where: { id: id } });
+    console.log("issuesedit>>>>>>>>>>>>>>>>>>>>>>", issuesedit[0].assignto);
+    res.render("editissue", { id, issuesedit, allcollabs, alllabel });
+  } else {
+    res.redirect("/login");
+  }
 };
 
 let editissue = async (req, res) => {
   try {
-    const id = req.query.id;
-    var repositoryId = req.query.repositoryId;
-    console.log("edddddiittititittt");
-    const issue = await Issues.findByPk(id);
-    if (!issue) {
-      return res.status(404).json({ error: "issue not found" });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      const id = req.query.id;
+      var repositoryId = req.query.repositoryId;
+      console.log("edddddiittititittt");
+      const issue = await Issues.findByPk(id);
+      if (!issue) {
+        return res.status(404).json({ error: "issue not found" });
+      }
+      issue.title = req.body.title;
+      issue.description = req.body.description;
+      issue.assignto = req.body.assignto;
+      issue.labels = req.body.labels;
+      await issue.save();
+      res.redirect(`/issueData?id=${repositoryId}`);
+      return { issue };
+    } else {
+      res.redirect("/login");
     }
-    issue.title = req.body.title;
-    issue.description = req.body.description;
-    issue.assignto = req.body.assignto;
-    issue.labels = req.body.labels;
-    await issue.save();
-    res.redirect(`/issueData?id=${repositoryId}`);
-    return { issue };
     // return res.status(500).json({ error: "server error" });
   } catch (err) {
     console.log("errro", err);
@@ -146,27 +188,33 @@ let editissue = async (req, res) => {
 };
 
 let issueData = async (req, res) => {
-  console.log("<<", req.header);
-  const token = req.headers.cookie;
-  console.log("token", token);
-  const user = JSON.parse(
-    Buffer.from(token.split(".")[1], "base64").toString("utf-8")
-  );
-  console.log("user<<<<", user);
-  console.log("user.id", user.id);
-  const uid = user.id;
+  var tokens = req.headers.cookie;
 
-  const issues = await Repository.findAll({
-    where: { userId: uid, id: req.query.id },
-    include: {
-      model: Issues,
-    },
-  });
-  console.log("???????????issues", issues);
+  if (tokens) {
+    console.log("<<", req.header);
+    const token = req.headers.cookie;
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user<<<<", user);
+    console.log("user.id", user.id);
+    const uid = user.id;
 
-  var data = issues[0].issuessses;
-  var id = req.query.id;
-  res.render("issues", { data, id });
+    const issues = await Repository.findAll({
+      where: { userId: uid, id: req.query.id },
+      include: {
+        model: Issues,
+      },
+    });
+    console.log("???????????issues", issues);
+
+    var data = issues[0].issuessses;
+    var id = req.query.id;
+    res.render("issues", { data, id });
+  } else {
+    res.redirect("/login");
+  }
 };
 module.exports = {
   renderissues,

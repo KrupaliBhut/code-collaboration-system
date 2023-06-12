@@ -7,7 +7,13 @@ const File = db.files;
 const multer = require("multer");
 const Repository = db.repositorys;
 let files = async (req, res) => {
-  res.render("code");
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    res.render("code");
+  } else {
+    res.redirect("/login");
+  }
 };
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -55,12 +61,18 @@ let upload = async (req, res) => {
 // };
 let filelist = async (req, res) => {
   try {
-    console.log("<<hello repos");
-    const repositories = await File.findAll();
-    console.log("<<repos repositories", repositories);
-    res.status(200).json({
-      repos: repositories,
-    });
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      console.log("<<hello repos");
+      const repositories = await File.findAll();
+      console.log("<<repos repositories", repositories);
+      res.status(200).json({
+        repos: repositories,
+      });
+    } else {
+      res.redirect("/login");
+    }
   } catch (err) {
     console.log("error", err);
   }
@@ -84,17 +96,23 @@ let filedelete = async (req, res) => {
 };
 let createfile = async (req, res) => {
   try {
-    console.log("...................................createfile");
-    const { filename, path, content } = req.body;
-    const file = await File.create({
-      filename: filename,
-      path: path,
-      content: content,
-      repositoryId: req.body.create,
-    });
-    console.log("{{{{{{{{{{{{{{{{{{{{{{", file);
-    var id = req.body.create;
-    res.redirect(`/codedata?id=${id}`);
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      console.log("...................................createfile");
+      const { filename, path, content } = req.body;
+      const file = await File.create({
+        filename: filename,
+        path: path,
+        content: content,
+        repositoryId: req.body.create,
+      });
+      console.log("{{{{{{{{{{{{{{{{{{{{{{", file);
+      var id = req.body.create;
+      res.redirect(`/codedata?id=${id}`);
+    } else {
+      res.redirect("/login");
+    }
     // res.render("fileupload");
   } catch (err) {
     console.log("error while uploading file", err);
@@ -102,28 +120,33 @@ let createfile = async (req, res) => {
   }
 };
 let codedata = async (req, res) => {
-  console.log("<<", req.header);
-  console.log("Codedata<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-  const token = req.headers.cookie;
-  console.log("token", token);
-  console.log("token", token);
-  const user = JSON.parse(
-    Buffer.from(token.split(".")[1], "base64").toString("utf-8")
-  );
-  console.log("user.id", user.id);
-  const uid = user.id;
+  var tokens = req.headers.cookie;
+  if (tokens) {
+    console.log("<<", req.header);
+    console.log("Codedata<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    const token = req.headers.cookie;
+    console.log("token", token);
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user.id", user.id);
+    const uid = user.id;
 
-  const issues = await Repository.findAll({
-    where: { userId: uid, id: req.query.id },
-    include: {
-      model: File,
-    },
-  });
-  console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
-  // console.log("filessss<", issues[0].files[0].id);
-  var datacode = issues[0].files;
-  var id = req.query.id;
-  res.render("code", { datacode, id });
+    const issues = await Repository.findAll({
+      where: { userId: uid, id: req.query.id },
+      include: {
+        model: File,
+      },
+    });
+    console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
+    // console.log("filessss<", issues[0].files[0].id);
+    var datacode = issues[0].files;
+    var id = req.query.id;
+    res.render("code", { datacode, id });
+  } else {
+    res.redirect("/login");
+  }
 };
 module.exports = {
   files,

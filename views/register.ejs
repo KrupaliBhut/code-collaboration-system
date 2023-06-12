@@ -121,10 +121,11 @@ h3 {
 </head>
 
 <body>
+  <form action="/registration" method="post">
     <div>
         <div class="container">
             <div class="form-container">
-                <form action="/registration" method="post">
+               
                     <h3>Welcome </h3>
                     <div class="data">
                         <div class="row">
@@ -143,11 +144,11 @@ h3 {
                         <input type="text" name="confirmpassword" id="confirmpassword" >
                        <div class="row">
                         <input type="submit" value="Sign up" id="register" class="submit-btn"
-                            >
+                            onclick="reg()">
                        
                        </div> 
                        <div class="dont">
-                        <div class="link" id="signup">Already have an account?<a href="">Login Here.</a>
+                        <div class="link" id="signup">Already have an account?<a href="/login">Login Here.</a>
                         </div>
                         </div>
                     </div>
@@ -162,5 +163,10 @@ h3 {
    
 
 </body>
+<script>
+  async function reg() {
+  location.assign('/registration');
+  }
+</script>
 
 </html>
