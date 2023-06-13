@@ -45,14 +45,11 @@
           
                             <div class="form-outline">
                               <label class="form-label" for="title">title</label>
-                              <input type="text" id="uptitle" name="title" value="<%= issuesedit[0].title%>" class="form-control form-control-lg" />
-                            
+                              <input type="text" id="uptitle" name="title" value="<%= issuesedit[0].title%>" class="form-control form-control-lg" />          
                             </div>
-          
-                          </div>
+                            </div>
                           <div class="col-md-6 mb-4">
-          
-                            <div class="form-outline">
+                                      <div class="form-outline">
                               <label class="form-label" for="description">description</label>
                               <input type="text" id="updescription" name="description" value="<%= issuesedit[0].description%>" class="form-control form-control-lg" />
                             </div>
@@ -75,7 +72,7 @@
                           <div class="col-md-6 mb-4">
           
                             Label :
-                                                        <select for="labels"  name="labels" class="form-label" multiple> 
+                                                        <select for="labels"  name="labels" class="form-label" > 
                              <% for (i=0;i< alllabel.length; i++) { %>
                               <% if(alllabel[i].labels == issuesedit[0].labels) { %>
                               <option id="labels" value="<%= alllabel[i].labels %>"selected><%= alllabel[i].labels %></option>
@@ -85,7 +82,6 @@
                               <% }} %>
                             </select>
                           </div>
-                          
 
                           <div class="mt-4 pt-2">
                             <input class="btn btn-primary btn-lg" type="submit" value="Submit" onclick="return addrepo()"/>
@@ -103,50 +99,8 @@
       </div>
 </body>
 <script>
-    // document.getElementById("edit-issue-form").addEventListener('submit', async(event)=> {
-    //     event.preventDefault();
-    //     const form = event.target;
-    //     const id = form.getAttribute('action').split('/').pop();
-    //     const formData = new Formdata(form);
-    //     try {
-    //         const response = await fetch('issues/${id}', {
-    //             method: 'post',
-    //             body: formData
-            
-    //         });
-    //         if(!response.ok) {
-    //             throw new Error('failed to fetch update issues');
-    //         }
-    //         console.log("issue updated");
-    //     }catch (error) {
-    //         console.error(error.message);
-    //     }
-    // });
- 
-    const updateUser = async (id)=>{
-    alert("hello")
-      var modal1 = document.getElementById("updateuser");
-      modal1.style.visibility = "visible";
-      const res = await axios.get(`/products/${id}`);
-      const user = res.data;
-      console.log('user<<',user);
-      document.getElementById('uptitle').value = user.title;
-      document.getElementById('updescription').value = user.description;
-      document.getElementById('upassignto').value = user.assignto;
-      document.getElementById('uplabels').value = user.lables;
-      const updateForm = document.querySelector('#updateuser');
-      updateForm.addEventListener('submit', async (e)=>{
-          e.preventDefault()
-          const res1 = await axios.put(`/issues/${id}`, {
-              name: document.getElementById('uptitle').value,
-              description: document.getElementById('updescription').value,
-              price: document.getElementById('upassignto').value,
-            cname: document.getElementById('uplabels').value,
-          })
-          document.querySelector('.model-container').style.visibility = "hidden";
-          console.log(res1);
-      })
-  }
+  
+  
       </script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </script>

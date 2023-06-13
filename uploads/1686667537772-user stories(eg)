@@ -1,0 +1,51 @@
+What is a user story?
+
+
+They are the conditions that a software product must meet to be accepted by a user, a customer, or other systems. 
+
+ User stories aim at describing what exactly the user wants the system to do, the goal of acceptance criteria is to explain the conditions that a specific user story must satisfy.
+
+ In software development and product management, a user story is an informal, natural language description of one or more features of a software system. User stories are often written from the perspective of an end user or user of a system 
+
+
+Example 1
+
+User story: As a user, I want to be able to recover the password to my account, so that I will be able to access my account in case I forgot the password.
+
+Scenario: Forgot password
+
+Given: The user navigates to the login page
+When: The user selects <forgot password> option
+And: Enters a valid email to receive a link for password recovery
+Then: The system sends the link to the entered email
+Given: The user receives the link via the email
+When: The user navigates through the link received in the email
+Then: The system enables the user to set a new password
+
+Example 2
+
+User story: As a user, I want to be able to request the cash from my account at an ATM so that I will be able to receive the money from my account quickly and in different places.
+
+Scenario 1: Requesting the cash from a creditworthy account
+
+Given: that the account is creditworthy
+And: the card is valid
+And: the dispenser contains cash
+When: the customer requests the cash
+Then: ensure the account is debited
+And: ensure cash is dispensed
+
+Example 3
+
+User story: As a user, I want to use a search field to type a city, name, or street, so that I could find matching hotel options.
+
+Basic search interface acceptance criteria
+
+The search field is placed on the top bar
+Search starts once the user clicks “Search”
+The field contains a placeholder with a grey-colored text: “Where are you going?”
+The placeholder disappears once the user starts typing
+Search is performed if a user types in a city, hotel name, street, or all combined
+Search is in English, French, German, and Ukrainian
+The user can’t type more than 200 symbols
+The search doesn’t support special symbols (characters). If the user has typed a special symbol, show the warning message: “Search input cannot contain  special symbols.

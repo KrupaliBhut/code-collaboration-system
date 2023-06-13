@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <style>
+            h3{
+                text-align:center;
+
+            }
+            div{
+                margin:0 auto;
+                background-color: cornflowerblue;
+            }
+            a{
+                align-items: center;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div>
+        <h3> Pagination</h3>
+    </div>
+        
+            <table align= "center" class="timeline-table2" border="1" style="background-color:gray;">
+                <tr>
+                    <td> id</td>
+                    <td>fname</td>
+                    <td>lname</td>
+                    <td>contact</td>
+                    <td>email</td>
+                    <td>c_id</td>
+                    <td>clgname</td>
+                    <td>city</td>
+                   
+                </tr>
+                <tr>
+                    <% data.forEach(entry => {%>
+                        <td> <%= entry.s_id %></td>
+                        <td> <%= entry.s_fname %></td>
+                        <td> <%= entry.s_lname %></td>
+                        <td> <%= entry.s_contact %></td>
+                        <td> <%= entry.s_email %></td>
+                        <td> <%= entry.clg_id %></td>
+                        <td> <%= entry.s_clg %></td>
+                        <td> <%= entry.s_city %></td>
+                       
+                </tr>
+           <% })%> 
+            </table>
+
+            <a href="http://127.0.0.1:4000/get1">1</a>|
+            <a href="http://127.0.0.1:4000/get2">2</a>|
+            <a href="http://127.0.0.1:4000/get3">3</a>|
+            <a href="http://127.0.0.1:4000/get4">4</a>|
+            <a href="http://127.0.0.1:4000/get5">5</a>|
+            <a href="http://127.0.0.1:4000/get6">6</a>|
+            <a href="http://127.0.0.1:4000/get7">7</a>|
+            <a href="http://127.0.0.1:4000/get8">8</a>|
+            <a href="http://127.0.0.1:4000/get9">9</a>|
+            <a href="http://127.0.0.1:4000/get10">10</a>
+      
+    </body>
+</html>
+
+
+
+
+for pagination

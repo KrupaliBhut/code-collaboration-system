@@ -17,32 +17,22 @@ let files = async (req, res) => {
 };
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/uploads");
+    return cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    const mimeExtension = {
-      "text/html": ".html",
-      " text/xml": ".xml",
-      "text/csv": ".csv",
-    };
-    cb(null, file.filename + "-" + mimeExtension(file.mimetype));
+    // const mimeExtension = {
+    //   "text/html": ".html",
+    //   " text/xml": ".xml",
+    //   "text/csv": ".csv",
+    // };
+    // cb(null, file.filename + "-" + mimeExtension(file.mimetype));
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 const uploadfile = multer({
   storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype === "text/html" ||
-      file.mimetype === "text/xml" ||
-      file.mimetype === "text/csv"
-    ) {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      req.fileError = "file formate is not valid";
-    }
-  },
 });
+
 let upload = async (req, res) => {
   res.render("fileupload");
 };
@@ -101,9 +91,10 @@ let createfile = async (req, res) => {
     if (token) {
       console.log("...................................createfile");
       const { filename, path, content } = req.body;
+      console.log("req.body file<<<<<<<<<<<<<<<<<<<<<<<", req.file.path);
       const file = await File.create({
         filename: filename,
-        path: path,
+        path: req.file.path,
         content: content,
         repositoryId: req.body.create,
       });

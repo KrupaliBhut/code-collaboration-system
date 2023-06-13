@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { ok } = require("assert");
 const Repository = db.repositorys;
 const Issues = db.issues;
+const Users = db.users;
 // let repos = async (req, res) => {
 //   try {
 //     const repositories = await Repository.findAll();
@@ -49,6 +50,7 @@ let dashboard = async (req, res) => {
     res.redirect("/login");
   }
 };
+
 let repolist = async (req, res) => {
   console.log("<<<<<<<<<<<<<<<<<<<createrepo call");
   // const { name, description, isPublic, privateValue } = req.body;
@@ -60,22 +62,15 @@ let repolist = async (req, res) => {
   );
   console.log("user.id", user.id);
   const uid = user.id;
-
   try {
-    var tokens = req.headers.cookie;
-
-    if (tokens) {
-      await Repository.create({
-        name: req.body.name,
-        description: req.body.description,
-        isPublic: req.body.isPublic,
-        privateValue: req.body.privateValue,
-        userId: uid,
-      });
-      res.redirect("/dashboard");
-    } else {
-      res.redirect("/login");
-    }
+    await Repository.create({
+      name: req.body.name,
+      description: req.body.description,
+      isPublic: req.body.isPublic,
+      privateValue: req.body.privateValue,
+      userId: uid,
+    });
+    res.redirect("/dashboard");
   } catch (err) {
     console.log("error while creating repo", err);
     res.status(500).send("error while creating repo");

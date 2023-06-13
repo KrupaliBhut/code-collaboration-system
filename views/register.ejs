@@ -117,10 +117,14 @@ h3 {
   padding: 10px;
   border-color: rgb(4, 4, 83);
 }
+.ifc {
+  color: red;
+}
    </style>
 </head>
 
 <body>
+ 
   <form action="/registration" method="post">
     <div>
         <div class="container">
@@ -135,13 +139,23 @@ h3 {
                        <div class="row">
                         <label for="email">Email</label><br>
                         <input type="email" name="email" id="email">
+                     </div>
+                     <div class="ifc">   <% if ( error!=" " && error == "email is already exists") { %>
+                          <p> <%= error %></p>
+                        <%}%>
+                      </div>
 </div>
+
 <div class="row">
                         <label for="password">Password</label><br>
                         <input type="password" name="password" id="password">     
 <div class="row">
                         <label for="confirmpassword">Confirm password</label><br>
                         <input type="text" name="confirmpassword" id="confirmpassword" >
+                        <div class="ifc">   <% if ( error!=" " && error == "plz match password and confirm password" ) { %>
+                          <p> <%= error %></p>
+                        <%}%>
+                      </div>
                        <div class="row">
                         <input type="submit" value="Sign up" id="register" class="submit-btn"
                             onclick="reg()">

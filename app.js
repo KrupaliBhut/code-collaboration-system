@@ -15,6 +15,7 @@ const collab = require("./router/collabroute");
 // app.get('/add', userctrl.addUser);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use("/", createtable);

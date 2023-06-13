@@ -1,0 +1,934 @@
+<html>
+
+<head>
+    <title>
+        page
+    </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="main-container">
+        <header>
+            <div class="container1">
+                <nav>
+                    <div id="navbar">
+                        <div id="logo">
+                            <div class="logo">
+                                <a href=""><img src="Logo.png"></a>
+                            </div>
+                        </div>
+                        <div id="nav-links">
+                            <ul>
+                                <li><a>Home</a></li>
+                                <li><a>Landings</a></li>
+                                <li><a>Pages</a></li>
+                                <li><a>Docs</a></li>
+                                <li><a>Help</a></li>
+
+                                <div id="nav-btn">
+                                    Get it now
+                            </ul>
+                        </div>
+                        </li>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <section>
+            <div class="container2">
+
+                <div class="image">
+                    <img src="Image.png" width="500px">
+                </div>
+
+                <div class="header-class">
+                    <h1 class="heading">Make your new life Happier.</h1>
+                    <p class="tagline">We work with serveral leading insurance companies to
+                        secure insurance coverage tailored to meet your needs.
+                    </p>
+                    <div class="boxes">
+                        <div class="leftbox-section1" style="display: flex;">
+                            <div class="img-p">
+                                <img src="path-1.png">
+                            </div>
+                            <div class="icontent">
+                                <h4>special expertrates</h4>
+                                <p id="p-class">excellent coverage.</p>
+                            </div>
+                        </div>
+
+                        <div class="leftbox-section2" style="display: flex; ">
+                            <div class="img-p">
+                                <img src="path-2.png">
+                            </div>
+                            <div class="icontent">
+                                <h4>Work life balance</h4>
+                                <p id="p-class">Make your life easier.</p>
+                            </div>
+                        </div>
+
+                        <div class="rightbox-section1" style="display: flex; padding-top: 15px;">
+                            <div class="img-p">
+                                <img src="images/i3.png">
+                            </div>
+                            <div class="icontent">
+                                <h4>24/7 English Support</h4>
+                                <p id="p-class">Call Us anytime</p>
+                            </div>
+                        </div>
+
+                        <div class="rightbox-section2" style="display: flex;">
+                            <div class="img-p">
+                                <img src="images/i4.png">
+                            </div>
+                            <div class="icontent">
+                                <h4>No Paperwork</h4>
+                                <p id="p-class">Just signup & use app</p>
+                            </div>
+                        </div>
+                        <div class="getbutton">
+                            <a class="abutton" href="">Get a Consultation</a>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+    </div>
+    </section>
+    <!-- section2 -->
+    <section>
+        <div class="content2">
+            <div class="center-label">
+                <p> OUR SERVICE </p>
+            </div>
+            <div class="center-label2">
+                <h2> Insurance made simple for you</h2>
+            </div>
+            <div class="center-label3">
+                <p style=" color: gray;
+                        text-align: center; width: 57%;"> We work with several leading insurance companies to secure
+                    insurance coverages tailored to meet your needs.</p>
+            </div>
+            <div class="label">
+                <div class="rightlabel">
+                    <div class="center-label4">
+                        <img src="images/Icon .svg">
+                        flexible product to make your life easy
+                    </div>
+                </div>
+                <div class="centerlabel">
+                    <div class="center-label5">
+                        <img src="images/Icon .svg">
+                        Highest standerds of service
+                    </div>
+                </div>
+                <div class="leftlabel">
+                    <div class="center-label6">
+                        <img src="images/Icon .svg">
+                        fast and relaible service
+                    </div>
+                </div>
+            </div>
+
+            <div class="row1">
+                <div class="leftbox">
+                    <div id="house">
+                        <img src="images/house.png">
+                    </div>
+                    <h3>House insurance</h3>
+                    <div class="insurance">
+                        <p> home insurance is type of insurance policy that provides cover from your home</p>
+                    </div>
+                    <div class="learn">
+                        <p><a class="aclass" href="#">Learn more -></a></p>
+                    </div>
+
+                </div>
+
+                <div class="middlebox">
+                    <div id="hand">
+                        <img src="images/hand.png">
+                    </div>
+
+                    <h3>Life insurance</h3>
+                    <div class="insurance">
+                        <p> Helping you bridge gaps in your health care coverage during times of transition.</p>
+                    </div>
+                    <div class="learn">
+                        <p><a class="aclass" href="#">Learn more -></a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rightbox">
+                <div id="car">
+                    <img src="images/car.png">
+                </div>
+                <h3>Car insurance</h3>
+                <div class="insurance">
+                    <p> Car insurance is a type of insurance policy that provides cover for your car.</p>
+                </div>
+                <div class="learn">
+                    <p><a class="aclass" href="#">Learn more -></a></p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <!-- 3rd section -->
+    <section id="bg">
+        <div class="container3">
+            <div class="manleft">
+
+                "
+                <p id="manleft"> This platform is one of the best companies I have dealt with in Indonesia. They're
+                    always
+                    happy to help, and i wouldn't hesitate to recommend them.
+                </p>
+                <div class="verified">
+                    <h4>Daniel Anderson</h4>
+                    <img src="images/Icon .svg">
+                    <p id="verifiedid">verified customer</p>
+                </div>
+
+            </div>
+            <div class="manright">
+
+            </div>
+        </div>
+    </section>
+    <!-- 4th section -->
+    <section>
+        <div class="container4">
+            <div class="section-four">
+
+                <div class="leftbox-2">
+                    <div id="hand">
+                        <p id="color">YOUR BENIFIT</p>
+                    </div>
+                    <div class="insurance">
+                        <h4 id="h4size"> We're your right insurance advocate</h4>
+                    </div>
+
+                </div>
+
+                <div class="middlebox-2">
+                    <div id="hand">
+                        <img src="images/Path.png">
+                    </div>
+
+                    <h3>we have the best prices</h3>
+                    <div class="insurance">
+                        <p> our insurance plan offer are priced the same every where else.we
+                            just make them easier for you to find.</p>
+                    </div>
+
+                </div>
+                <div class="rightbox-2">
+                    <div id="hand">
+                        <img src="images/Path.png">
+                    </div>
+
+                    <h3>we'are your insurance advocate</h3>
+                    <div class="insurance">
+                        <p> We will deal with the insuraance companies for you, even after you've bought your plan.
+                        </p>
+                    </div>
+
+                </div>
+                <!--  -->
+                <div class="leftbox-3">
+                    <div id="hand">
+                        <img src="images/Path.png">
+                    </div>
+
+                    <h3>we're unbiased</h3>
+                    <div class="insurance">
+                        <p>Our online tools help you decide what product
+                            is best for you. We're here to insurance plan you choose.</p>
+                    </div>
+
+                </div>
+
+                <div class="middlebox-3">
+                    <div id="hand">
+                        <img src="images/Path.png">
+                    </div>
+
+                    <h3>We're available 24/7</h3>
+                    <div class="insurance">
+                        <p> We have your back 24/7 between our online
+                            chat function, email and telephone support.</p>
+                    </div>
+
+                </div>
+                <div class="rightbox-3">
+                    <div id="hand">
+                        <img src="images/Path.png">
+                    </div>
+
+                    <h3>We make insurance simple</h3>
+                    <div class="insurance">
+                        <p> We're committed to making applying
+                            for insurance as simple as can be for our customers.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        
+
+        </div>
+
+    </section>
+    <!-- SECTION 5TH -->
+     <section>
+         <div class="container5">  
+
+            <div class="center-label">
+                <p> OUR TIPS FOR YOU </p>
+            </div>
+                <div class="center-label2">
+                    <h2> Reinventing your protection</h2>
+                </div>
+                <div class="center-label3">
+                <p style=" color: gray;
+                text-align: center; width: 57%;"> We share common trends, strategies ideas, 
+                opinions, shorts & long stories from the team behind company.</p>
+            </div>
+            
+            <div class="lastimage">
+                <div class="h3-class">
+                <h3>How to prevent and protect your family from carbon monoxide</h3>
+            </div>
+            </div>
+            <div class="lastimage-2">
+                <div class="h3-class2">
+                    <h3>Motherhood is the hardest and the best job ever</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 6th section -->
+    <section>
+        <div class="container6">
+
+            <div class="center-label">
+                <p> TESTIMONIALS </p>
+            </div>
+                <div class="center-label2">
+                    <h2> What our customer have to says</h2>
+                </div>
+                <div class="4section">
+                    <div class="class1">
+                        <div id="hand">
+                            <img src="images/Path.png">
+                        </div>
+    
+                        <h3>we're unbiased</h3>
+                        <div class="insurance">
+                            <p>Our online tools help you decide what product
+                                is best for you. We're here to insurance plan you choose.</p>
+                        </div>
+    
+                    </div>
+    
+                    <div class="class2">
+                        <div id="hand">
+                            <img src="images/Path.png">
+                        </div>
+    
+                        <h3>We're available 24/7</h3>
+                        <div class="insurance">
+                            <p> We have your back 24/7 between our online
+                                chat function, email and telephone support.</p>
+                        </div>
+    
+                    </div>
+                    <div class="class3">
+                        <div id="hand">
+                            <img src="images/Path.png">
+                        </div>
+    
+                        <h3>We make insurance simple</h3>
+                        <div class="insurance">
+                            <p> We're committed to making applying
+                                for insurance as simple as can be for our customers.
+                            </p>
+                        </div>
+    
+                    </div>
+                    <div class="class4">
+                        <div id="hand">
+                            <img src="images/Path.png">
+                        </div>
+    
+                        <h3>We make insurance simple</h3>
+                        <div class="insurance">
+                            <p> We're committed to making applying
+                                for insurance as simple as can be for our customers.
+                            </p>
+                        </div>
+    
+                    </div>
+                </div>
+        </div>
+    </section>
+    </div>
+</body>
+
+</html>
+
+......................................................................
+.container1{
+    margin: 0 auto;
+    width: 1170px;
+    padding: 0 16px;
+    }
+    
+    .container2{
+        margin: 0 auto;
+        width: 1170px;
+        padding: 0 16px;
+        } 
+        .content2{
+            margin: 0 auto;
+            width: 1170px;
+            padding: 0 16px;
+          
+         
+            margin-bottom: -48%;
+           
+            background-size: 100%;
+          
+        }
+    .row{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+    
+    }
+    .col{
+    width: 33.333%;
+    padding: 0 16px;
+    }
+    
+    /* *{
+    margin: 0;
+    padding: 0;
+    } */
+    #navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    margin-top: -2%;
+    }
+    
+    #logo-text{
+    font-size: 25px;
+    }
+    
+    #logo{
+    width: 48%;
+    /* margin-left: 10%; */
+    }
+    
+    #nav-links{
+    width: 48%;
+    margin-left: -31%;
+    }
+    
+    #nav-btn{
+    height: 40px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid blue;
+    }
+    
+    ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    ul li{
+    margin-left: 20px;
+    }
+    h5{
+    font-size: 30px;
+    }
+    .container2{
+    margin: 0 auto;
+    display: flex;
+    
+    }
+    .image{
+    width:50%;
+    margin-left: -7%;
+    /* padding: 16px; */
+
+    }
+    .header-class{
+    /* text-align: right; */
+    width:50%;
+        /* padding: 16px; */
+
+     
+    
+    
+    }
+    h1{
+    
+    text-align: center;
+    font-size:65px;
+    
+    }
+    .span-class{
+    margin-left:67%;
+    }
+    
+    
+    .span{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    }
+    .tagline{
+    font-size:28px;
+    color: gray;
+    }
+    .heading{
+    font-size:50px;
+    margin-bottom: -13%;
+    
+    width: 617px;
+    }
+    .forbox{
+        text-align: right;
+        display: flex;
+    }
+    .icontent{
+        margin-right: 15px;
+        }
+    .boxes
+{
+
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+margin-top: -14%;
+
+}
+.box-light{
+    color: gray;
+}
+
+
+.leftbox-section1 {
+width:50%;
+margin-top: -3%;
+
+}
+
+.leftbox-section2 {
+    width:50%;
+    margin-top: -3%;
+    margin-left: -4%;
+}
+.rightbox-section1 {
+
+width:50%;
+margin-top: -3%;
+
+}
+.rightbox-section2 {
+
+    width:50%;
+    margin-top: -1%;
+    margin-left: -4%;
+    }
+.img-p
+{
+margin-right: 15px;
+margin-top: 6%;
+}
+.tagline{
+    font-size: 22px;
+    margin-left: -17%;
+    margin-bottom: 6%;
+    text-align: right;
+    width: 85%;
+    padding: 87px;
+}
+#p-class{
+    margin-top: -15%;
+   
+    margin-right: -10%;
+}
+.getbutton{
+    margin-top: 0 auto;
+   
+    height: 60px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+   background-color: rgb(36, 36, 189);
+   margin-top: 9%;
+}
+.abutton{
+    color: white;
+    text-decoration: none;
+}
+
+.center-label {
+    margin-top: 220px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 800;
+    color: rgb(103, 246, 8);
+    }
+    .content2{
+        margin-top: -7%;
+    }
+    .center-label2 {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 20px;
+        }
+        .center-label3{
+            text-align: center;
+            margin-left: 37%;
+            margin-top: 20px;
+            margin-left: 32%;
+            /* width: 63; */
+        }
+        .right{
+            text-align: center;
+
+    margin-top: 3%;
+        }
+        .center-label4{
+            width: 111%;
+            margin-left: -28%;
+            height: auto;
+        }
+        .center-label5{
+          
+            width: 108.333%;
+
+    margin-left: -81%;
+
+           
+        }
+        .center-label6{
+            
+            padding-left: 16px;
+         
+            width: 111%;
+           
+            margin-left: -29%;
+        }
+        .iconsecond{
+            color: rgb(41, 41, 131);
+            padding: 26px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .iconsecondcontent{
+        margin-right: 15px;
+        }
+        .leftbox {
+            float:left;
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-left: 8%;
+            margin-top: 6%;
+        }
+        .middlebox{
+            float:left;
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-left: 10%;
+            margin-top: 6%;
+        }
+        .rightbox{
+            float:right;  
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-right: 12%;
+            margin-top: 6%;
+        }
+        .aclass{
+            margin-top: 0 auto;
+            text-decoration: none;
+        }
+        #house{
+            margin-bottom: 10%;
+        }
+        #hand{
+            margin-bottom: 10%;
+        }
+        #car{
+            margin-bottom: 10%;
+        }
+        
+        .insurance{
+            margin-top: 10%;
+        }
+        .learn{
+            margin-top: 10%;
+        }
+        .rightlabel{
+            /* width: 33.333%; */
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            float:left;
+           
+            width: 22%;
+            padding-left: 16px;
+           
+            margin-left: 14%;
+            margin-top: 6%;
+        }
+        .centerlabel{
+            width: 33.333%;
+            display: flex;
+            flex-wrap: wrap;
+            float:left;
+            width: 17%;
+            padding-left: 16px;
+            margin-left: 19%;
+            margin-top: 6%;
+        }
+        .leftlabel{
+            width: 33.333%;
+            display: flex;
+            flex-wrap: wrap;
+            float:left;
+             
+            padding-left: 16px;
+           
+            margin-top: 6%;
+            margin-left: -2%;
+    width: 16%;
+        }
+        .container3{
+            margin: 0 auto;
+            display: flex;
+            width: 1170px;
+            padding: 0 16px;
+            background-image: url("review.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            margin-bottom: -5%;
+            }
+
+            .manleft{
+                margin: 0 auto;
+                width: 1170px;
+                padding: 0 16px;
+                width: 30%;
+                font-size: 25px;
+                display: flex;
+                flex-wrap: wrap;
+                /* border: 10px; */
+                background-color: white;
+               border-radius: 10px;
+               margin-top: 5%; 
+               margin-left: 8%;
+                margin-bottom: 12%;
+                padding: 16px;
+            }
+            .verified{
+            width: 100%;
+            display: flex;
+            margin-top: 10%;
+            }
+            #verifiedid{
+                color: gray;
+                font-size: 20px;
+                margin-bottom: 11%;
+   
+            }
+            /* section4 */
+            .container4{
+              
+                margin: 0 auto;
+                display: flex;
+                width: 1170px;
+                padding: 0 16px;
+                margin-bottom: -15%;
+               
+                background-size: 100%;
+              
+                
+            }
+            .leftbox-2 {
+                float:left;
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-left: 8%;
+                margin-top: 6%;
+            }
+            .middlebox-2{
+                float:left;
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-left: 10%;
+                margin-top: 6%;
+            }
+            .rightbox-2{
+                float:right;  
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-right: 12%;
+                margin-top: 6%;
+            }
+            #color{
+                color: green;
+            }
+            #h4size{
+                font-size: 25px;
+            }
+            .leftbox-3 {
+                float:left;
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-left: 8%;
+                margin-top: 6%;
+                margin-top: -5%;
+            }
+            .middlebox-3{
+                float:left;
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-left: 10%;
+                margin-top: 6%;
+                margin-top: -5%;
+            }
+            .rightbox-3{
+                float:right;  
+                width: 17%;
+                height:280px;
+                padding-left: 16px;
+                margin-right: 12%;
+                margin-top: 6%;
+                margin-top: -5%;
+            }
+            .container5{
+                margin: 0 auto;
+                width: 1170px;
+                padding: 0 16px;
+                margin-bottom: -5%;
+            }
+            .lastimage{
+              
+                width: 37%;
+                font-size: 25px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                background-color: white;
+               border-radius: 10px;
+               margin-top: 5%; 
+               margin-left: 8%;
+                margin-bottom: 10%;
+                padding: 16px;
+                background-image: url("images/last.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            margin-bottom: -5%;
+            }
+            .h3-class{
+                color: white;
+                margin-bottom: 36%;
+    margin-top: 71%;
+            }
+            .h3-class2{
+                color: white;
+                margin-bottom: 36%;
+    margin-top: 71%;
+    padding: 5%;
+            }
+           .lastimage-2{
+            width: 37%;
+            font-size: 25px;
+            display: flex;
+            margin-top: -53%;
+    margin-left: 54%;
+            flex-wrap: wrap;
+            background-image: url("images/last.png");
+            background-repeat: no-repeat;
+            background-size: 107%;
+           }
+           .container6{
+            margin: 0 auto;
+            display: flex;
+            width: 1170px;
+            padding: 0 16px;
+            /* background-image: url("review.png");
+            background-repeat: no-repeat; */
+            background-size: 100%;
+            margin-bottom: -5%;
+        }
+        .class1 {
+            float:left;
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-left: 8%;
+            margin-top: 6%;
+        }
+        .class2{
+            float:left;
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-left: 10%;
+            margin-top: 6%;
+        }
+        .class3{
+            float:right;  
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-right: 12%;
+            margin-top: 6%;
+        }
+        .class4{
+            float:right;  
+            width: 17%;
+            height:280px;
+            padding-left: 16px;
+            margin-right: 12%;
+            margin-top: 6%;
+        }

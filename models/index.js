@@ -53,7 +53,8 @@ db.files = require("../models/file")(sequelize, DataTypes);
 db.branches = require("../models/branch")(sequelize, DataTypes);
 db.issues = require("../models/issuesss")(sequelize, DataTypes);
 db.collabs = require("../models/collas")(sequelize, DataTypes);
-db.labels = require("../models/label")(sequelize, DataTypes);
+db.labels = require("../models/labissue")(sequelize, DataTypes);
+db.lab = require("../models/label")(sequelize, DataTypes);
 // db.users.hashOne(db.repositorys, { foreignKey: "userId" });
 db.repositorys.belongsTo(db.users);
 
@@ -61,6 +62,7 @@ db.repositorys.hasMany(db.issues, { foreignKey: "repositoryId" });
 db.issues.belongsTo(db.repositorys, { foreignKey: "repositoryId" });
 // db.repositorys.hasMany(db.issues, { foreignKey: "id" });
 // db.issues.belongsTo(db.repository, { foreignKey: "repositoryId" });
+
 db.repositorys.hasMany(db.files, { foreignKey: "repositoryId" });
 db.files.belongsTo(db.repositorys, { foreignKey: "repositoryId" });
 
@@ -69,6 +71,13 @@ db.repositorys.belongsTo(db.files, { foreignKey: "repositoryId" });
 
 db.users.hasMany(db.collabs, { foreignKey: "userId" });
 db.collabs.belongsTo(db.users, { foreignKey: "repositoryId" });
+
+// db.labels.hasMany(db.repositorys, { foreignKey: "repositoryId" });
+// db.repositorys.belongsTo(db.labels, { foreignKey: "repositoryId" });
+
+db.issues.hasMany(db.labels, { foreignKey: "issueId" });
+db.labels.belongsTo(db.issues, { foreignKey: "issueId" });
+
 db.sequelize
   .sync({ force: false })
   .then(() => {

@@ -13,7 +13,7 @@
     />
   </head>
   <body>
-    <form method="post" action="/createfile">
+    <form method="post" action="/createfile" enctype="multipart/form-data">
       <input type="text" value="<%=id%>" name="create" hidden />
       <a type="button" href="/codedata?id=<%=id%>" class="btn btn-primary">
         Back</a

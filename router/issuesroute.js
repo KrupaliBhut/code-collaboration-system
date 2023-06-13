@@ -10,6 +10,7 @@ const {
   button,
   tabss,
   issueData,
+  check,
 } = require("../controller/issuescontroller");
 
 router.route("/renderissues").get(renderissues);
@@ -20,6 +21,7 @@ router.route("/issuedelete").get(issuedelete);
 router.route("/issues").post(editissue);
 router.route("/button").get(button);
 
+router.route("/check").get(check);
 router.route("/issueData").get(issueData);
 router.route("/tabss/:id").get(tabss);
 module.exports = router;

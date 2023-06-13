@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <style>
+            h3{
+                text-align:center;
+
+            }
+            div{
+                margin:0 auto;
+                background-color: cornflowerblue;
+            }
+            a{
+                align-items: center;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div>
+        <h3> Pagination</h3>
+    </div>
+        
+            <table align= "center" class="timeline-table2" border="1" style="background-color:gray;">
+                <tr>
+                    <td > id</td>
+                    <td onclick="editRecords('/admin?page=1')" ondblclick="editRecords2()" id="click1">fname</td>
+                    <td onclick="editRecords('/lname/1')" ondblclick="editRecords2('/lname/1')">lname</td>
+                    <td onclick="editRecords('/contact/1' )" ondblclick="editRecords2('/contact/1')">contact</td>
+                    <td onclick="editRecords('/email/1')" ondblclick="editRecords2('/email/1')">email</td>
+                    <td onclick="editRecords('/cid/1')" ondblclick="editRecords2('/cid/1')">c_id</td>
+                    <td onclick="editRecords('/clgname/1')" ondblclick="editRecords2('/clgname/1')">clgname</td>
+                    <td onclick="editRecords('/city/1')" ondblclick="editRecords2('/city/1')">city</td>
+                   
+                </tr>
+                <% for(var i=0;i<data.length;i++) { %>
+                   
+                <tr>
+                  
+                        <td> <%= data[i].s_id %></td>
+                        <td> <%= data[i].s_fname %></td>
+                        <td> <%= data[i].s_lname %></td>
+                        <td> <%= data[i].s_contact %></td>
+                        <td> <%= data[i].s_email %></td>
+                        <td> <%= data[i].clg_id %></td>
+                        <td> <%= data[i].s_clg %></td>
+                        <td> <%= data[i].s_city %></td>
+                       
+                </tr>
+           <% }%> 
+            </table>
+            <% for(i=1;i<=div;i++){ %>
+                <a href="/body/<%=i%>"><%=i%></a>
+          <%  }%>
+
+           
+      
+    </body>
+    <script>
+        function editRecords(val)
+        {
+            window.location.href = "http://127.0.0.1:8000"+ val;
+        }
+        // const button = document.getElementById('click');
+//  button.addEventListener('click', function(e){
+//     console.log('click');
+function editRecord2(val2)
+        {
+            window.location.href = "http://127.0.0.1:8000"+ val2;
+        }
+    </script>
+</html>
+

@@ -1,0 +1,42 @@
+const sql = require('mysql2');
+
+var express = require('express');
+var app = express();
+
+var bodyParser = require('body-parser');
+
+
+// database connection
+
+const pool = sql.createConnection({
+     host: 'localhost',
+     user: 'root',
+     password: 'root',
+     database: 'student'
+         
+});
+pool.connect();
+app.get('/body/:page',(req,res)=>
+{
+     var variable = req.params.page || 1;
+     var limit = 10;
+     var offset = (variable - 1)* limit;
+     var sql=`select * from student_master order by s_id limit ${offset},${limit}`;
+     pool.query(sql,(err,data)=>
+     {
+          if(err) throw err;
+          var count = "select count(s_id) as  a from student_master";
+
+          pool.query(count,(err,result)=>
+          {
+               if(err) throw err;
+               var k = result[0].a;
+               var div = Math.floor(k/limit)+1;
+               console.log(div);
+               res.render('tp.ejs', {data:data,div});
+          });
+     })
+})
+app.listen(4000, function () {
+    console.log('Node app is running on port 2000');
+    });

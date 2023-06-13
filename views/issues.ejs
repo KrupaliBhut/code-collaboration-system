@@ -17,6 +17,9 @@
       }
       .me {
       }
+      ul {
+  list-style-type: none;
+}
     </style>
   </head>
   <body>
@@ -33,6 +36,8 @@
           <th scope="col">description</th>
           <th scope="col">assignto</th>
           <th scope="col">labels</th>
+          <th scope="col" ></th>
+          <th scope="col" ></th>
           <th scope="col">Action</th>
           <th scope="col">Action</th>
         </tr>
@@ -43,10 +48,17 @@
                 <td><%=data[i].title%></td>
                 <td><%=data[i].description%></td>
                 <td><%=data[i].assignto%></td>
-                <td><%=data[i].labels%></td>
+                <td>
+                <ul>
+                <% for (var j=0; j < data[i].labissues.length; j++) { %>
+                <li> <%= data[i].labissues[j].labels%></li>
+               <% } %>
+              </ul>
+            </td>
+               <td></td>
+               <td></td>
                 <td> <a href="/issuedelete?repositoryId=<%=id%>&id=<%=data[i].id %>">Delete</a>
                   <td> <a href="/button?repositoryId=<%=id%>&id=<%=data[i].id %>">Edit</a>
-
             </tr>
             <%}%>
       </tbody>

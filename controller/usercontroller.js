@@ -6,7 +6,9 @@ const jwt = require("jsonwebtoken");
 const Users = db.users;
 const SecreteKey = "krupali";
 let reg = async (req, res) => {
-  res.render("register");
+  var error = " ";
+
+  res.render("register", { error });
 };
 let registration = async (req, res) => {
   try {
@@ -14,7 +16,13 @@ let registration = async (req, res) => {
     let finduser = await Users.findOne({ where: { email } });
 
     if (finduser) {
-      console.log("email is already exist");
+      const error = "email is already exists";
+      res.render("register", { error });
+      return;
+    } else if (password != confirmpassword) {
+      const error = "plz match password and confirm password";
+      res.render("register", { error });
+      return;
     } else {
       const hash = await bcrypt.hash(password, 10);
       let data = await Users.create({
@@ -66,7 +74,10 @@ let login = async (req, res) => {
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid username or password" });
+      const error = "password is invalid";
+      res.render("login", { error });
+      return;
+      // return res.status(401).json({ message: "Invalid username or password" });
     }
 
     const token = jwt.sign({ id: user.id }, "krupali");
@@ -81,7 +92,8 @@ let login = async (req, res) => {
 };
 
 let log = async (req, res) => {
-  res.render("login");
+  var error = " ";
+  res.render("login", { error });
 };
 let logout = async (req, res) => {
   res.clearCookie("token");
