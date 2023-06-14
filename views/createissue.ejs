@@ -33,7 +33,8 @@
 <body>
     <form method="post" action="/createissues" >
       <input type="text" value="<%=id%>" name="create" hidden/>
-        <a id="backbtn" href="/issueData?id=<%=id%>" class="bi bi-arrow-return-left">back</a>
+        <a type="button" href="/issueData?id=<%=id%>" class="btn btn-primary">
+          Back</a>
           <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
               <div class="row justify-content-center align-items-center h-100">

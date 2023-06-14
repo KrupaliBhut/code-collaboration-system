@@ -54,7 +54,19 @@
       <!-- <a id="deleterepo" class="btn btn-primary float-right" type="submit">
         Delete Repository
       </a> -->
+
+      <div class="input-group">
+        <h4>Search Repo</h4>
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          oninput="change(this)"
+        />
+        <button type="button" class="btn btn-outline-primary">search</button>
+      </div>
       <h3>Repository List</h3>
+      <div id="new"></div>
       <table class="table">
         <thead>
           <tr>
@@ -66,13 +78,26 @@
     </form>
   </body>
   <script>
-    async function confirmation(id) {
-      if (confirm("Are you sure to delete this data..?")) {
-        axios.delete(`/repodelete/${id}`).then(function (response) {});
-      } else {
-        alert("not deleted");
-      }
+    async function change(name) {
+      var div_ele = document.getElementById("new");
+      var user = name.value;
+      console.log("name.value", name.value);
+      console.log("name<<<<: " + name);
+      const res = await fetch(`/searchrepo?name=${user}`);
+      const results = await res.json();
+      const AllRepos = results.repos;
+      var html = ``;
+      AllRepos.forEach((element, i) => {
+        let htmlSegmnt = ` <ul>
+      ${element.name}
+     
+    </ul>
+        `;
+        html += htmlSegmnt;
+      });
+      div_ele.innerHTML = html;
     }
+
     const FetchRepo = async () => {
       const data = await fetch("/repos");
       const results = await data.json();
@@ -84,7 +109,9 @@
        <tbody>
         <tr>
       <td><a href="/tabs/${element.id}">${element.name}</a></td>
-      <td><button onclick="confirmation(${element.id})">Delete</button></td>
+    
+      <td> <a href="/repodelete?id=${element.id}">Delete</a>
+
       </tr>
      </tbody>
     </ul>

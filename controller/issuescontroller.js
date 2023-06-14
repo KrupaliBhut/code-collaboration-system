@@ -15,7 +15,6 @@ let renderissues = async (req, res) => {
 };
 let issuecreate = async (req, res) => {
   var token = req.headers.cookie;
-  console.log("token in token........", token);
   if (token) {
     var id = req.query.id;
     console.log("iiiiiiiiiiiiiiiiiiiiiiiiii", id);
@@ -43,7 +42,7 @@ let issuecreate = async (req, res) => {
 };
 let label = async (req, res) => {
   var token = req.headers.cookie;
-  console.log("token in token........", token);
+ 
   if (token) {
     var id = req.query.id;
 
@@ -57,7 +56,6 @@ let label = async (req, res) => {
 let issue = async (req, res) => {
   try {
     var token = req.headers.cookie;
-    console.log("token in token........", token);
     if (token) {
       console.log("<<hello issues");
       const issues = await Issues.findAll();
@@ -77,7 +75,7 @@ let tabss = async (req, res) => {
   var token = req.headers.cookie;
   console.log("token in token........", token);
   if (token) {
-    console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+   
     const repositoryId = req.params.id;
     console.log("<<req.params.id", req.params.id);
     const issues = await Issues.findAll({});
@@ -198,7 +196,6 @@ let check = async (req, res) => {
   };
   res.status(200).json(response);
 
-  // console.log("alllabelllllllllllllllll", alllabel);
 };
 
 let issues = async (req, res) => {
@@ -206,7 +203,6 @@ let issues = async (req, res) => {
   console.log("...", req.body.labels);
   try {
     var token = req.headers.cookie;
-    console.log("token in token........", token);
     if (token) {
       let issues = await Issues.create({
         title: req.body.title,
@@ -218,7 +214,6 @@ let issues = async (req, res) => {
 
       if (issues && issues.dataValues.id) {
         const labels = req.body.labels;
-        console.log("labels........................>", req.body.labels);
         // for (i = 0; i < labels.length; i++) {
         await Labels.create({
           labels: labels,

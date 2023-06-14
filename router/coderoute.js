@@ -17,8 +17,6 @@ router.route("/upload").get(upload);
 // router.route("/createfile", uploadfile.single("path")).post(createfile);
 
 router.post("/createfile", uploadfile.single("path"), createfile);
-// router.route("/createfile").post(createfile);
-// router.route("/upfile").post(upfile);
 router.route("/filecreate").get(filecreate);
 router.route("/filelist").get(filelist);
 router.route("/codedata").get(codedata);

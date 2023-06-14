@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      collas.belongsTo(models.users, {
+        foreignKey: "userId",
+      });
+      collas.belongsTo(models.reposss, {
+        foreignKey: "repositoryId",
+      });
     }
   }
   collas.init({

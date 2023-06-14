@@ -8,8 +8,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
       // reposss.hasOne(models.issuesss, { foreignKey: "repositoryId" });
+      reposss.belongsTo(models.users, {
+        foreignKey: "userId",
+      });
+      reposss.hasMany(models.issuesss, {
+        foreignKey: "id",
+      });
     }
   }
   reposss.init(

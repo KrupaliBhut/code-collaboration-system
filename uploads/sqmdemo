@@ -1,0 +1,69 @@
+reate database job_application;
+use job_application;
+
+
+create table academic_master(ac_id int primary key, 
+							 coursename varchar(55),
+                             board varchar(55),
+                             percentage int,
+                             passingyear year,
+                                    candidate_id int,
+                                    foreign key (candidate_id) references candidate(candidate_id)
+                                    );
+                                    
+
+create table experience_master(company_id int primary key,
+								company_name varchar(55),
+                                company_position varchar(55),
+                                joining_date date,
+                                leaving_date date,
+                                ex_createdate date,
+                                CTC int,
+                                
+                                candidate_id int,
+								foreign key (candidate_id) references candidate(candidate_id)
+                                );
+                                
+create table reference_master(reference_id int primary key,
+								ref_name varchar(55),
+                                ref_contact int,
+                                ref_email varchar(55),
+                                ref_createdate DATETIME,
+                                candidate_id int,
+								foreign key (candidate_id) references candidate(candidate_id)
+								);
+                                
+create table language_master( l_id int primary key,
+							  l_name varchar(55),
+                              l_read int,
+                              l_write int,
+                              l_speak int,
+                              l_createdate DATETIME,
+                              candidate_id int,
+							  foreign key (candidate_id) references candidate(candidate_id)
+						);
+                        
+create table technologies_master(tech_id int primary key,
+								renge int,
+                                tech_createdate DATETIME,
+                                candidate_id int,
+								foreign key (candidate_id) references candidate(candidate_id)
+                                );
+                                
+create table preferance_master(p_id int primary key,
+								p_location varchar(55),
+                                p_noticeperiod int,
+                                p_expactedctc int,
+                                p_currentctc int,
+                                p_department varchar(55),
+                                p_createdate DATETIME,
+                                candidate_id int,
+								foreign key (candidate_id) references candidate(candidate_id)
+                                );
+                                
+                                
+                                
+                                insert into candidate values(1,'krupali','jamanadas','bhut',9106687724,'jethwa fali','jetput','gujarat','krupali@gmail.com','female','2002-04-19','2023-02-02');
+insert into candidate values(2,'chandani','rameshbhai','vora',8106687724,'anganwadi','jetput','gujarat','chandani@gmail.com','female','2002-04-19','2023-02-02');
+insert into candidate values(3,'jiya','mukeshbhai','bakori',8206698210,'zanzardaroad','junagadh','gujarat','bakori@gmail.com','female','2000-04-15','2023-02-02');
+                                

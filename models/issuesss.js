@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // issuesss.belongsTo(models.reposss, { foreignKey: "repositoryId" });
+      issuesss.hasMany(models.reposss, {
+        foreignKey: "repositoryId",
+      });
     }
   }
   issuesss.init(

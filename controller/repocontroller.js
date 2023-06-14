@@ -7,25 +7,33 @@ const { ok } = require("assert");
 const Repository = db.repositorys;
 const Issues = db.issues;
 const Users = db.users;
-// let repos = async (req, res) => {
-//   try {
-//     const repositories = await Repository.findAll();
 
-//     repo.forEach((repository) => {
-//       console.log("<<<name", repository.name);
-//       res.render("repolist", { repositories });
-//     });
-//   } catch (err) {
-//     console.log("error", err);
-//   }
-// };
 let repos = async (req, res) => {
   try {
-    var token = req.headers.cookie;
-    console.log("token in token........", token);
-    if (token) {
+    var tokens = req.headers.cookie;
+    console.log("token in token........", tokens);
+    if (tokens) {
+      const token = req.headers.cookie;
+      console.log("token", token);
+      console.log("token", token);
+      const user = JSON.parse(
+        Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+      );
+      console.log("user.id", user.id);
+      const uid = user.id;
+
       console.log("<<hello repos");
-      const repositories = await Repository.findAll();
+      const repositories = await Repository.findAll({
+        where: { userId: uid },
+      });
+      // const repositoriespublic = await Repository.findAll({
+      //   where: { isPublic: "true" },
+      // });
+      // const repositoriesprivate = await Repository.findAll({
+      //   where: { privateValue: "true" },
+      // });
+      // console.log("repositoriespublic<......", repositoriespublic);
+      // console.log("repositoriesprivate<......", repositoriesprivate);
       console.log("<<repos repositories", repositories);
       res.status(200).json({
         repos: repositories,
@@ -78,11 +86,20 @@ let repolist = async (req, res) => {
 };
 let repodelete = async (req, res) => {
   try {
+    const token = req.headers.cookie;
+    console.log("token", token);
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user.id", user.id);
+    const uid = user.id;
     console.log("<<<<<<<<<<<repodelete call");
     const deleterepo = await Repository.destroy({
-      where: { id: req.params.id },
+      where: { id: req.query.id },
     });
-
+    var id = req.query.uid;
+    // res.redirect(`/dashboard?id=${id}`);
     res.redirect("/dashboard");
   } catch (err) {
     throw err;
@@ -123,6 +140,38 @@ let repoissu = async (req, res) => {
   });
   res.json(Repository);
 };
+let searchrepo = async (req, res) => {
+  console.log("<<<<<<<<<<<<search all repos");
+  try {
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      const { name } = req.query;
+      console.log("search repo", req.query.name);
+      const users = await Repository.findAll({
+        where: {
+          isPublic: "true",
+          name: {
+            [Op.like]: `%${name}%`,
+          },
+        },
+      });
+      console.log("user<<<", users);
+      res.status(200).json({
+        repos: users,
+      });
+    } else {
+      res.redirect("/login");
+    }
+    // res.json(users);
+  } catch (err) {
+    console.log(
+      "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    );
+    console.log(err.message);
+    res.status(500).json({ error: "server error" });
+  }
+};
 module.exports = {
   repos,
   repolist,
@@ -131,4 +180,5 @@ module.exports = {
   tabs,
   repoissu,
   dashboard,
+  searchrepo,
 };
