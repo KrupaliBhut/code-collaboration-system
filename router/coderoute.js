@@ -9,6 +9,7 @@ const {
   codedata,
   uploadfile,
   filecreate,
+  codedata2,
 } = require("../controller/codecontrooler");
 
 router.route("/code").get(files);
@@ -20,5 +21,7 @@ router.post("/createfile", uploadfile.single("path"), createfile);
 router.route("/filecreate").get(filecreate);
 router.route("/filelist").get(filelist);
 router.route("/codedata").get(codedata);
+router.route("/codedata2").get(codedata2);
 router.route("/filedelete/:id").delete(filedelete);
+
 module.exports = router;

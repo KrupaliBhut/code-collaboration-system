@@ -42,7 +42,7 @@ let issuecreate = async (req, res) => {
 };
 let label = async (req, res) => {
   var token = req.headers.cookie;
- 
+
   if (token) {
     var id = req.query.id;
 
@@ -75,7 +75,6 @@ let tabss = async (req, res) => {
   var token = req.headers.cookie;
   console.log("token in token........", token);
   if (token) {
-   
     const repositoryId = req.params.id;
     console.log("<<req.params.id", req.params.id);
     const issues = await Issues.findAll({});
@@ -179,7 +178,7 @@ let issueData = async (req, res) => {
       include: [{ model: Issues, include: [Labels] }],
     });
     console.log("???????????issuesshow ", issues);
-    console.log("???????????issues[0].issuessses ", issues[0].issuessses[1]);
+
     var data = issues[0].issuessses;
     var id = req.query.id;
     res.render("issues", { data, id });
@@ -195,7 +194,6 @@ let check = async (req, res) => {
     data: alllabel,
   };
   res.status(200).json(response);
-
 };
 
 let issues = async (req, res) => {
@@ -299,7 +297,32 @@ let editissue = async (req, res) => {
 //     console.log("errro", err);
 //   }
 // };
+let issueData2 = async (req, res) => {
+  var tokens = req.headers.cookie;
 
+  if (tokens) {
+    console.log("<<", req.header);
+    const token = req.headers.cookie;
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user<<<<", user);
+    console.log("user.id", user.id);
+    const uid = user.id;
+
+    const data = await Repository.findAll({
+      // where: { id: req.query.id },
+      where: { id: req.query.id },
+      include: [{ model: Issues }],
+    });
+    // var data = issues[0].issuessses;
+    var id = req.query.id;
+    res.render("issues2", { data, id });
+  } else {
+    res.redirect("/login");
+  }
+};
 module.exports = {
   renderissues,
   issue,
@@ -312,4 +335,5 @@ module.exports = {
   tabss,
   label,
   check,
+  issueData2,
 };

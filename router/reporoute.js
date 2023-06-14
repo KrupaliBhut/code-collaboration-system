@@ -11,6 +11,9 @@ const {
   repoissu,
   dashboard,
   searchrepo,
+  pagecollabs,
+  extra,
+  tabs2,
 } = require("../controller/repocontroller");
 const validateUser = require("../middleware/authtoken");
 
@@ -19,7 +22,10 @@ router.route("/repocreate").get(repocreate);
 router.route("/repolist").post(repolist);
 // router.route("/repodelete/:id").delete(repodelete);
 router.route("/repodelete").get(repodelete);
+router.route("/pagecollabss").get(pagecollabs);
+router.route("/extra").get(extra);
 router.route("/tabs/:id").get(tabs);
+router.route("/tabs2/:id").get(tabs2);
 router.route("/searchrepo").get(searchrepo);
 router.route("/dashboard").get(dashboard);
 router.route("/repoissu/:id").get(repoissu);

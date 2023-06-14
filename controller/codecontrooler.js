@@ -139,6 +139,35 @@ let codedata = async (req, res) => {
     res.redirect("/login");
   }
 };
+let codedata2 = async (req, res) => {
+  var tokens = req.headers.cookie;
+  if (tokens) {
+    console.log("<<", req.header);
+    console.log("Codedata<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    const token = req.headers.cookie;
+    console.log("token", token);
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user.id", user.id);
+    const uid = user.id;
+
+    const issues = await Repository.findAll({
+      where: { id: req.query.id },
+      include: {
+        model: File,
+      },
+    });
+    console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
+    // console.log("filessss<", issues[0].files[0].id);
+    var datacode = issues[0].files;
+    var id = req.query.id;
+    res.render("code2", { datacode, id });
+  } else {
+    res.redirect("/login");
+  }
+};
 module.exports = {
   files,
   upload,
@@ -148,4 +177,5 @@ module.exports = {
   codedata,
   uploadfile,
   filecreate,
+  codedata2,
 };

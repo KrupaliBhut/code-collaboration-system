@@ -4,11 +4,12 @@ const {
   pagecollabs,
   collab,
   createcollabs,
-  deletecollabs,
+  deletecollabs,pagecollabs2
 } = require("../controller/collabcontroller");
 
 router.route("/createcollabs").get(createcollabs);
 router.route("/pagecollabs").get(pagecollabs);
+router.route("/pagecollabs2").get(pagecollabs2);
 router.route("/collab").get(collab);
 router.route("/deletecollabs").get(deletecollabs);
 module.exports = router;

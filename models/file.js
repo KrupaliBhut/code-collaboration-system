@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      file.belongsTo(models.reposss, {
+        foreignKey: "repositoryId",
+      });
     }
   }
   file.init({

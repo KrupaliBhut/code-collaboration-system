@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
       });
       reposss.hasMany(models.issuesss, {
-        foreignKey: "id",
+        foreignKey: "repositoryId",
+      });
+      reposss.hasMany(models.file, {
+        foreignKey: "repositoryId",
       });
     }
   }

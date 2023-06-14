@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       collas.belongsTo(models.reposss, {
         foreignKey: "repositoryId",
       });
+      collas.belongsTo(models.users, {
+        foreignKey: "userId",
+      });
     }
   }
   collas.init({

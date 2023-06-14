@@ -94,4 +94,38 @@ let deletecollabs = async (req, res) => {
     throw err;
   }
 };
-module.exports = { pagecollabs, collab, createcollabs, deletecollabs };
+let pagecollabs2 = async (req, res) => {
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.id;
+    // const coid = await Collabs.findAll({
+    //   where: { repositoryId: id },
+    // });
+    const coid = await Users.findAll({
+      attributes: ["username", "email"],
+      include: [
+        {
+          model: Collabs,
+          where: {
+            repositoryId: id,
+          },
+          required: true,
+          raw: true,
+        },
+      ],
+    });
+    console.log("coid???????????????????", coid);
+
+    res.render("collab2", { id, coid });
+  } else {
+    res.redirect("/login");
+  }
+};
+module.exports = {
+  pagecollabs,
+  collab,
+  createcollabs,
+  deletecollabs,
+  pagecollabs2,
+};

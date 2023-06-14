@@ -67,6 +67,8 @@
       </div>
       <h3>Repository List</h3>
       <div id="new"></div>
+
+      <div id="data"></div>
       <table class="table">
         <thead>
           <tr>
@@ -90,7 +92,7 @@
       AllRepos.forEach((element, i) => {
         let htmlSegmnt = ` <ul>
       ${element.name}
-     
+      <a href="/pagecollabss?repositoryId=${element.id}">show</a>
     </ul>
         `;
         html += htmlSegmnt;
@@ -109,7 +111,7 @@
        <tbody>
         <tr>
       <td><a href="/tabs/${element.id}">${element.name}</a></td>
-    
+     
       <td> <a href="/repodelete?id=${element.id}">Delete</a>
 
       </tr>

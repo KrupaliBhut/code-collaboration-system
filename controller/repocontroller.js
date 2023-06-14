@@ -21,7 +21,6 @@ let repos = async (req, res) => {
       );
       console.log("user.id", user.id);
       const uid = user.id;
-
       console.log("<<hello repos");
       const repositories = await Repository.findAll({
         where: { userId: uid },
@@ -172,6 +171,54 @@ let searchrepo = async (req, res) => {
     res.status(500).json({ error: "server error" });
   }
 };
+let pagecollabs = async (req, res) => {
+  var token = req.headers.cookie;
+  console.log("token in token........", token);
+  if (token) {
+    var id = req.query.repositoryId;
+    console.log("id..<<", req.query.repositoryId);
+    // const coid = await Collabs.findAll({
+    //   where: { repositoryId: id },
+    // });
+    const coid = await Repository.findAll({
+      where: { id: id },
+    });
+    console.log("searchrepos???????????????????", coid);
+    // res.status(200).json({
+    //   repos: coid,
+    // });
+    res.render("extra", { coid, id });
+  } else {
+    res.redirect("/login");
+  }
+};
+let extra = async (req, res) => {
+  res.render("extra");
+};
+let tabs2 = async (req, res) => {
+  console.log("tabs2<<<<<<<<<<<");
+  const id = req.params.id;
+  console.log("tab<<<<<<<<<<<id", req.params.id);
+  try {
+    var token = req.headers.cookie;
+    console.log("token in token........", token);
+    if (token) {
+      const repository = await Repository.findOne({ where: { id: id } });
+      if (repository) {
+        console.log("hello lkhj");
+        res.render("three2", { repository });
+      } else {
+        res.status(404).send("Repository not found");
+      }
+      console.log("repository<<<", repository);
+    } else {
+      res.redirect("/login");
+    }
+  } catch (err) {
+    console.log("retriving error", err);
+    res.status(500).send("error retriewing");
+  }
+};
 module.exports = {
   repos,
   repolist,
@@ -181,4 +228,7 @@ module.exports = {
   repoissu,
   dashboard,
   searchrepo,
+  pagecollabs,
+  extra,
+  tabs2,
 };
