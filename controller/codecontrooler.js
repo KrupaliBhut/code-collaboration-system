@@ -26,7 +26,7 @@ let storage = multer.diskStorage({
     //   "text/csv": ".csv",
     // };
     // cb(null, file.filename + "-" + mimeExtension(file.mimetype));
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${file.originalname}`);
   },
 });
 const uploadfile = multer({

@@ -75,9 +75,9 @@
                                                         <select for="labels"  name="labels" class="form-label" > 
                              <% for (i=0;i< alllabel.length; i++) { %>
                               <% if(alllabel[i].labels == issuesedit[0].labels) { %>
-                              <option id="labels" value="<%= alllabel[i].labels %>"selected><%= alllabel[i].labels %></option>
+                              <option id="labels" value="<%= alllabel[i].labels %>"selected><%=  issuesedit[0].labels %></option>
                               <% }  else {%>
-                                <option id="labels" value="<%= alllabel[i].labels %>"><%= alllabel[i].labels %></option>
+                                <option id="labels" value="<%= alllabel[i].labels %>"><%=  alllabel[i].labels %></option>
 
                               <% }} %>
                             </select>

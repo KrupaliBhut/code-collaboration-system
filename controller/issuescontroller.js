@@ -134,9 +134,10 @@ let issuedelete = async (req, res) => {
 };
 let button = async (req, res) => {
   var token = req.headers.cookie;
-  console.log("token in token........", token);
+  console.log("token in token for button........", token);
   if (token) {
     var id = req.query.id;
+    console.log("button id.....>>>>>...", req.query.id);
     var repositoryId = req.query.repositoryId;
     console.log("id>>>>>>>>>>>>>>>>>>>>>>", id);
     const allcollabs = await Users.findAll({
@@ -153,6 +154,7 @@ let button = async (req, res) => {
       ],
     });
     const alllabel = await Lab.findAll({});
+    // const issuesedit = await Labels.findAll({ where: { issueId: id } });
     const issuesedit = await Issues.findAll({ where: { id: id } });
     console.log("issuesedit>>>>>>>>>>>>>>>>>>>>>>", issuesedit[0].assignto);
     res.render("editissue", { id, issuesedit, allcollabs, alllabel });
@@ -210,12 +212,13 @@ let issues = async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         assignto: req.body.assignto,
-        labels: req.body.labels[i],
+        labels: req.body.labels,
         repositoryId: req.body.create,
       });
 
       if (issues && issues.dataValues.id) {
         const labels = req.body.labels;
+        console.log("labels........................>", req.body.labels);
         // for (i = 0; i < labels.length; i++) {
         await Labels.create({
           labels: labels,
