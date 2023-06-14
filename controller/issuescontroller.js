@@ -311,12 +311,12 @@ let issueData2 = async (req, res) => {
     console.log("user.id", user.id);
     const uid = user.id;
 
-    const data = await Repository.findAll({
+    const issues = await Repository.findAll({
       // where: { id: req.query.id },
       where: { id: req.query.id },
       include: [{ model: Issues }],
     });
-    // var data = issues[0].issuessses;
+    var data = issues[0].issuessses;
     var id = req.query.id;
     res.render("issues2", { data, id });
   } else {

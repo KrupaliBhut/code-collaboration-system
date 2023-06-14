@@ -31,21 +31,21 @@
       <thead>
         
         <tr>
-         
+            <th scope="col">title</th>
           <th scope="col">description</th>
-         
-         
+          <th scope="col">assignto</th>
+          <th scope="col">labels</th>
         
         </tr>
       </thead>
       <tbody>
         <% for(var i=0;i<data.length;i++){ %>
             <tr>
-                
+                <td><%=data[i].title%></td>
                 <td><%=data[i].description%></td>
-              
+                <td><%=data[i].assignto%></td>
+                <td><%=data[i].labels%></td>
             </td>
-               
             </tr>
             <%}%>
       </tbody>
