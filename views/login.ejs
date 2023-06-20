@@ -9,7 +9,7 @@
     <!-- <link rel="stylesheet" href="/style.css"> -->
     <style>
         body {
-            background-image: url('/images/auth-bg.png');
+           
             background-repeat: no-repeat;
             margin: 0;
         }
@@ -135,28 +135,26 @@
             <div class="form-container">
                 <form action="/repos" method="post">
                     <div class="logo">
-                        <img src="logo.svg" alt="">
+                      
                     </div>
 
                     <h3>Welcome Back!</h3>
                     <div class="row">
 
-                        <label for="username">UserName</label><br>
-                        <input type="text" name="username" id="username">
+                        <label for="usernameemail">UserName or Email</label><br>
+                        <input type="text" name="usernameemail" id="usernameemail">
                         <span id="email_err"></span>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
 
                         <label for="email">Email</label><br>
                         <input type="email" name="email" id="email">
                         <span id="email_err"></span>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <label for="password">Password</label><br>
                         <input type="password" name="password" id="password">
-                        <div class="ifc">   <% if ( error != undefined) { %>
-                            <p> <%= error %></p>
-                          <%}%>
+                        <div class="ifc">  
                         </div>
                     </div>
                     <div class="row">
@@ -170,9 +168,7 @@
             </form>
         </div>
     </div>
-    <div class="bottom-logo">
-        <img src="bottom-logo.png" alt="" style="border: 1px solid black;">
-    </div>
+   
     </div>
 </body>
 <script>

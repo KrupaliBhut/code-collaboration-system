@@ -1,8 +1,9 @@
-const { Sequelize } = require("../models");
+const { Sequelize, sequelize } = require("../models");
 const { Op } = require("sequelize");
 var db = require("../models/index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { nextTick } = require("process");
 const Users = db.users;
 const SecreteKey = "krupali";
 let reg = async (req, res) => {
@@ -67,8 +68,12 @@ let registration = async (req, res) => {
 // };
 let login = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await Users.findOne({ where: { username } });
+    const { usernameemail, password } = req.body;
+    const user = await Users.findOne({
+      where: {
+        [Op.or]: [{ username: usernameemail }, { email: usernameemail }],
+      },
+    });
     if (!user) {
       return res.status(401).json({ message: "Invaid username or password" });
     }
@@ -84,10 +89,23 @@ let login = async (req, res) => {
     console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", token);
     res.cookie("token", token, {});
     // res.json({ token });
+    const tokens = req.headers.cookie;
+    console.log("tokens", tokens);
+    const decoded = tokens ? jwt.verify(token, "krupali") : null;
+    const path = req.originalUrl;
+    console.log("req.originalUrl.....................................", path);
+    if (path == "/login" && token == null) {
+      res.redirect("/repos");
+    }
+
+    console.log("Request...");
+
+    console.log("decoded", decoded);
 
     res.render("dashboard", { token });
-  } catch (err) {
-    console.log("error", err);
+  } catch (error) {
+    console.log("error", error);
+    // res.render("login", { error });
   }
 };
 
@@ -95,6 +113,9 @@ let log = async (req, res) => {
   var error = " ";
   res.render("login", { error });
 };
+
+// res.render("login", { error });
+
 let logout = async (req, res) => {
   res.clearCookie("token");
   res.redirect("/login");

@@ -70,7 +70,7 @@ db.files.hasMany(db.repositorys, { foreignKey: "repositoryId" });
 db.repositorys.belongsTo(db.files, { foreignKey: "repositoryId" });
 
 db.users.hasMany(db.collabs, { foreignKey: "userId" });
-db.collabs.belongsTo(db.users, { foreignKey: "repositoryId" });
+db.collabs.belongsTo(db.users, { foreignKey: "userId" });
 
 // db.labels.hasMany(db.repositorys, { foreignKey: "repositoryId" });
 // db.repositorys.belongsTo(db.labels, { foreignKey: "repositoryId" });

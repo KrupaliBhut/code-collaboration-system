@@ -2,13 +2,15 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class users extends Model {
-   
     static associate(models) {
       // define association here
       // users.hashOne(models.reposss, {
       //   foreignKey: "userId",
       // });
       users.hasMany(models.collas, {
+        foreignKey: "userId",
+      });
+      users.hasMany(models.reposss, {
         foreignKey: "userId",
       });
     }
@@ -18,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       username: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      confirmpassword: DataTypes.STRING,
     },
     {
       sequelize,

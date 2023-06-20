@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 var db = require("../models/index");
 const { name } = require("ejs");
 const Collabs = db.collabs;
+
 const Users = db.users;
 const Repository = db.repositorys;
 let pagecollabs = async (req, res) => {
@@ -10,9 +11,7 @@ let pagecollabs = async (req, res) => {
   console.log("token in token........", token);
   if (token) {
     var id = req.query.id;
-    // const coid = await Collabs.findAll({
-    //   where: { repositoryId: id },
-    // });
+    console.log("collas id<<<<", req.query.id);
     const coid = await Users.findAll({
       attributes: ["username", "email"],
       include: [
@@ -84,6 +83,7 @@ let createcollabs = async (req, res) => {
 let deletecollabs = async (req, res) => {
   try {
     console.log("<<<<<<<<<<<repodelete call");
+
     const deletecols = await Collabs.destroy({
       where: { id: req.query.id },
     });

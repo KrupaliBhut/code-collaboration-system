@@ -1,6 +1,6 @@
 const db = require("../models");
 const Users = db.users;
-const { jwt } = require("jsonwebtoken");
+const  jwt  = require("jsonwebtoken");
 const authenticateUser = async (req, res, next) => {
   const token = req.rawHeaders[7];
   console.log("token", token);
