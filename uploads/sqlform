@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+            fieldset {
+  background-color: #eeeeee;
+}
+
+legend {
+  background-color: gray;
+  color: white;
+  padding: 5px 10px;
+}
+        </style>
+</head>
+<body>
+   
+    <form action="sqlform.html">
+        
+        <fieldset>
+            <legend>candidate</legend>
+            <table>
+                <tr>
+           <td> <label for="fname">candidate_fname:</label></td>
+            <td><input type="text" id="fname" name="fname"></td>
+            <td> <label for="lname">candidate_lname:</label></td>
+        <td><input type="text" id="lname" name="lname"></td>
+        </tr>
+        <!-- <tr>
+            
+        </tr> -->
+        <tr>
+            <td> <label for="surname">candidate_surname:</label></td>
+                <td><input type="text" id="surname" name="surname"></td>
+                <td><label for="contact">candidate_contact:</label></td>
+            <td><input type="text" id="contact" name="contact"></td>
+        </tr>
+        <!-- <tr>
+            
+        </tr> -->
+        <tr>
+            <td><label for="address">candidate_address:</label></td>
+            <td><textarea id="address" name="address"></textarea></td>
+            <td> <label for="city">candidate_city:</label></td>
+            <td><input type="text" id="city" name="city"></td>
+        </tr>
+       
+        <tr>
+            <td> <label for="state">candidate_state:</label></td>
+                <td> <select name="state" id="state" >
+                <option value="Gujarat">Gujarat</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Goa">Goa</option>
+                <option value="UP">UP</option>
+                <option value="Kerala">Kerala</option>
+                <option value="andhrapradesh">andhrapradesh</option>
+                <td>  <label for="email">candidate_email:</label></td>
+                    <td> <input type="email" id="email" name="email"></td>
+              </select></td>
+            </tr>
+           
+            <tr>
+                <td>   <label> Your Gender:</label></td> 
+                <td> female:<input type="radio" id="female" name="gender" value="female">
+                    male:<input type="radio" id="male" name="gender" value="male">
+                    other:<input type="radio" id="other" name="gender" value="other"></td>
+                    
+            </tr>
+            <tr>
+               <td> <label for="email">candidate_email:</label></td>
+                    <td>  <input type="email" id="email" name="email"></td>
+                    <td> <label for="dob">candidate_dob:</label></td>
+                    <td><input type="date" id="dob" name="dob"></td>
+                </tr>
+                
+                </table>
+              </fieldset>
+<!-- acadamics -->
+              <fieldset>
+                <legend>acadamics</legend>
+                <table>
+                    <tr>
+                        <td> <label for="course">course name:</label></td>
+                        <td> <select name="course" id="course" >
+                        <option value="ssc">ssc</option>
+                        <option value="hsc">hsc</option>
+                        <option value="diploma">diploma</option>
+                        <option value="b.com">b.com</option>
+                        <option value="m.com">m.com</option>
+                        <option value="bca">bca</option>
+                        <option value="mca">mca</option>
+                        <option value="bsc">bsc</option>
+                        <option value="msc">msc</option>
+                        <option value="be">be</option>
+                        <option value="me">me</option></select>
+                        </td></tr>
+
+                        <tr>
+                            <td> <label for="board">course name:</label></td>
+                            <td> <select name="board" id="board" >
+                            <option value="ssc">ssc</option>
+                            <option value="hsc">hsc</option>
+                            <option value="diploma">diploma</option>
+                            <option value="b.com">b.com</option>
+                            <option value="m.com">m.com</option>
+                            <option value="bca">bca</option>
+                            <option value="mca">mca</option>
+                            <option value="bsc">bsc</option>
+                            <option value="msc">msc</option>
+                            <option value="be">be</option>
+                            <option value="me">me</option></select>
+                            </td></tr>
+
+
+
+                        <td>  <label for="email">candidate_email:</label></td>
+                            <td> <input type="email" id="email" name="email"></td>
+                      </select></td>
+               </tr>
+                    </table>
+                  </fieldset>
+            
+    
+    </form>
+</div>
+</body>
+</html>

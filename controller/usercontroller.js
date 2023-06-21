@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { nextTick } = require("process");
 const Users = db.users;
-const SecreteKey = "krupali";
+const key = "krupali";
 let reg = async (req, res) => {
   var error = " ";
 
@@ -66,7 +66,7 @@ let registration = async (req, res) => {
 //     console.log("error", err);
 //   }
 // };
-let login = async (req, res) => {
+let login = async (req, res, next) => {
   try {
     const { usernameemail, password } = req.body;
     const user = await Users.findOne({
@@ -87,10 +87,14 @@ let login = async (req, res) => {
 
     const token = jwt.sign({ id: user.id }, "krupali");
     console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", token);
+    // if (!token) {
+    //   return res.status(404).send("Invalid token");
+    // }
+    // next();
     res.cookie("token", token, {});
+
     // res.json({ token });
     const tokens = req.headers.cookie;
-    console.log("tokens", tokens);
     const decoded = tokens ? jwt.verify(token, "krupali") : null;
     const path = req.originalUrl;
     console.log("req.originalUrl.....................................", path);
@@ -109,7 +113,28 @@ let login = async (req, res) => {
   }
 };
 
-let log = async (req, res) => {
+let log = async (req, res, next) => {
+  const token = req.headers.cookie;
+  console.log("tokens>>>>>>>>>>>", token);
+
+  if (token) {
+    const decoded = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("data<<<<<<<<<", decoded);
+  }
+  // const decoded = jwt.verify(token, key);
+  // const data = jwt.verify(token, "krupali");
+  const path = req.originalUrl;
+  console.log(
+    "req.originalUrlinlog.....................................",
+    path
+  );
+  if (path == "/login" && token) {
+    res.redirect("/dashboard");
+  }
+  console.log("Request...");
+  next();
   var error = " ";
   res.render("login", { error });
 };

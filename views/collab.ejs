@@ -11,6 +11,16 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <style>
+      #deletebtn{
+          background-color: rgb(61, 61, 224);
+          border-radius: 20px solid rgb(61, 61, 224);
+          border:rgb(61, 61, 224);
+          color: white;
+          padding: 5px;
+  
+      }
+    </style>
   </head>
   <body>
     <a type="button" href="/tabs/<%=id%>" class="btn btn-primary">
@@ -34,8 +44,7 @@
           <td>
             <%= coid[i].username %></td>
          <td>   <%= coid[i].email %></td>
-    <td> <button onclick="confirmation(`<%=coid[i].collas[0].id %>`)">Delete</button></td>
-          <td> <a href="/deletecollabs?repositoryId=<%=id%>&id=<%=coid[i].collas[0].id %>">Delete</a>
+         <td> <button id="deletebtn" onclick="confirmation(`<%=coid[i].collas[0].id %>`)">Delete</button></td>
           </td></tr>
           <% }%>
         </tbody>
@@ -47,13 +56,13 @@
 <script>
        async function confirmation(id) {
    if (confirm("if you delete this user then it also delete from issue..are you sure..?")) {
-   axios.delete(`/deletecollabs?id=${id}`).then(function (response) 
-   { return "data deleted" })
+   axios.delete(`/deletecollabs?id=${id}`).then(function (response){})
    console.log("scswf");
-   window.location.reload()
+   
     } else {
     alert("not deleted");
   }
+  window.location.reload()
        }
     async function change(name) {
 var div_ele = document.getElementById('new');

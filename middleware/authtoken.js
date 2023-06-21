@@ -1,36 +1,30 @@
-const db = require("../models");
-const Users = db.users;
-const  jwt  = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const authenticateUser = async (req, res, next) => {
-  const token = req.rawHeaders[7];
-  console.log("token", token);
-  if (!token) {
-    return res.status(401).json({ message: "No token provided" });
-  }
-  const decoded = jwt.verify(token, "krupali");
-  const user = await Users.findOne(decoded.id);
+  try {
+    console.log("Authenticating");
+    const token = req.headers.cookie;
+    console.log("token<", token);
+    if (!token) {
+      // return res.status(401).json({ message: "No token provided" });
+      res.redirect("/login");
+    }
+    console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
 
-  if (!user) {
-    return res.satus(401).json({ message: "user not found" });
-  }
-  req.user = user;
-  next();
-
-  jwt.verify(token, "krupali", async (err, decoded) => {
-    if (err) {
+    const decoded = jwt.verify(token);
+    console.log(
+      ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    );
+    console.log("decoded", decoded);
+    if (decoded) {
       return res.status(401).json({ message: "Invalid token" });
+    } else {
+      res.status(500).json({ message: "server error" });
     }
-    try {
-      const user = await Users.findByPk(decoded.id);
-      if (!user) {
-        return res.status(401).json({ message: "User not found" });
-      }
-      req.user = user;
-      next();
-    } catch (error) {
-      return res.status(500).json({ message: "Server error" });
-    }
-  });
-};
+    req.user = decoded;
 
-module.exports = { authenticateUser };
+    next();
+  } catch (err) {
+    // res.status(500).json({ message: "server error" });
+  }
+};
+module.exports = authenticateUser;

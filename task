@@ -1,10 +1,12 @@
-14/06/2023
-
-Technology: Node js 
-
-Task/Learnings:
-- added public or private functionally 
-- other user only see public repo
-- done..
-
-
+app.get('/validate', (req, res) => { 
+  const expectedToken = 'your_expected_token'; 
+  const currentToken = req.cookies.token; 
+  if (currentToken === expectedToken) 
+  { 
+    res.send('Token is valid!'); 
+    } else { 
+      // Handle invalid token here res.status(401).send('Invalid token'); } }); 
+      app.listen(3000, () => 
+      {
+        console.log('Server is running on port 3000'); 
+        });

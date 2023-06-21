@@ -101,6 +101,11 @@
 location.assign(`/dashboard`)
 
 }
+const previousToken = localStorage.getItem('token');
+localStorage.setItem('token',previousToken);
+localStorage.setItem('token',newToken);
+const previous = localStorage.getItem('previousToken');
+console.log('previousToken', previous);
 
 </script>
 </html>

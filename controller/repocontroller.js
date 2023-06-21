@@ -8,10 +8,9 @@ const Repository = db.repositorys;
 const Issues = db.issues;
 const Users = db.users;
 
-let repos = async (req, res) => {
+let repos = async (req, res, next) => {
   try {
     var tokens = req.headers.cookie;
-    console.log("token in token........", tokens);
 
     if (tokens) {
       const token = req.headers.cookie;
@@ -20,6 +19,7 @@ let repos = async (req, res) => {
       const user = JSON.parse(
         Buffer.from(token.split(".")[1], "base64").toString("utf-8")
       );
+
       console.log("user.id", user.id);
       const uid = user.id;
       console.log("<<hello repos");
@@ -46,11 +46,40 @@ let repos = async (req, res) => {
     console.log("error", err);
   }
 };
-let repocreate = async (req, res) => {
+
+let repocreate = async (req, res, next) => {
+  // const newToken = req.query.token;
+  // const previousToken = req.headers.cookie;
+  // console.log("previousToken.........................<<...?<<", previousToken);
+  // req.headers.cookie = newToken;
+  // console.log("new token", newToken);
+  // const token = req;
+  // console.log("token", token);
+  // const token = req.headers.cookie;
+  // console.log("token", token);
+  // const decoded = jwt.sign(token, "krupali");
+  // req.user = decoded;
+  // const user = await Users.findOne(decoded.id);
+  // const newtoken = token;
+  // console.log("newtoken", newtoken);
+  // if (token !== newtoken) {
+  //   const errormsg = "Invalid token";
+  //   return res.render("index", { errormsg });
+  // }
+  // console.log("decoded", decoded);
   res.render("createrepo");
 };
+
 let dashboard = async (req, res) => {
-  var token = req.headers.cookie;
+  const token = req.headers.cookie;
+  // const expectedToken = cookie.jwt;
+  // console.log("expectedToken", expectedToken);
+  // if (token !== expectedToken) {
+  //   const errormsg = "Invalid token";
+  //   return res.render("index", { errormsg });
+  // } else {
+  //   console.log("success");
+  // }
   console.log("token in token........", token);
   if (token) {
     res.render("dashboard");
@@ -59,11 +88,10 @@ let dashboard = async (req, res) => {
   }
 };
 
-let repolist = async (req, res) => {
+let repolist = async (req, res, next) => {
   console.log("<<<<<<<<<<<<<<<<<<<createrepo call");
   // const { name, description, isPublic, privateValue } = req.body;
   const token = req.headers.cookie;
-  console.log("token", token);
   console.log("token", token);
   const user = JSON.parse(
     Buffer.from(token.split(".")[1], "base64").toString("utf-8")
@@ -106,10 +134,14 @@ let repodelete = async (req, res) => {
   }
 };
 
-let tabs = async (req, res) => {
+let tabs = async (req, res, next) => {
   console.log("tab<<<<<<<<<<<");
   const id = req.params.id;
-
+  var token = req.headers.cookie;
+  if (token !== token) {
+    const errormsg = "Invalid token";
+    return res.render("index", { errormsg });
+  }
   try {
     var token = req.headers.cookie;
     console.log("token in token........", token);
@@ -130,7 +162,12 @@ let tabs = async (req, res) => {
     res.status(500).send("error retriewing");
   }
 };
-let repoissu = async (req, res) => {
+let repoissu = async (req, res, next) => {
+  var token = req.headers.cookie;
+  if (token !== token) {
+    const errormsg = "Invalid token";
+    return res.render("index", { errormsg });
+  }
   const id = req.params.id;
   const repository = await Issues.findOne({
     where: { id: id },

@@ -13,7 +13,12 @@ let pagecollabs = async (req, res) => {
     var id = req.query.id;
     console.log("collas id<<<<", req.query.id);
     const coid = await Users.findAll({
-      attributes: ["username", "email"],
+      attributes: ["username", "email", "id"],
+      where: {
+        id: {
+          [Op.notIn]: Sequelize.literal(`(select id from collas)`),
+        },
+      },
       include: [
         {
           model: Collabs,
@@ -26,6 +31,7 @@ let pagecollabs = async (req, res) => {
       ],
     });
     console.log("coid???????????????????", coid);
+    // console.log("coid???????????????????", coid);
 
     res.render("collab", { id, coid });
   } else {
@@ -36,8 +42,10 @@ let collab = async (req, res) => {
   console.log("<<<<<<<<<<<<colaab");
   try {
     var token = req.headers.cookie;
+
     console.log("token in token........", token);
     if (token) {
+      var id = req.query.id;
       const { name } = req.query;
       const users = await Users.findAll({
         where: {
@@ -45,6 +53,11 @@ let collab = async (req, res) => {
             [Op.like]: `%${name}%`,
           },
         },
+        include: [
+          {
+            model: Collabs,
+          },
+        ],
       });
       console.log("user<<<", users);
       res.status(200).json({
