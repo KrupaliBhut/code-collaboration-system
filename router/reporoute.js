@@ -33,8 +33,8 @@ router.route("/tabs2/:id").get(tabs2);
 router.route("/searchrepo").get(searchrepo);
 // router.route("/dashboard", checkTokenValidity).get(dashboard);
 router.route("/repoissu/:id").get(repoissu);
-router.get("/repocreate", repocreate);
-router.get("/dashboard", dashboard);
+router.get("/repocreate", authenticateUser, repocreate);
+router.get("/dashboard", authenticateUser, dashboard);
 router.post("/repolist", authenticateUser, repolist);
 router.get("/tabs/:id", authenticateUser, tabs);
 

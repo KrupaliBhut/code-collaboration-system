@@ -177,11 +177,12 @@ let issueData = async (req, res) => {
       where: { userId: uid, id: req.query.id },
       include: [{ model: Issues, include: [Labels] }],
     });
+
     console.log("???????????issuesshow ", issues);
 
     var data = issues[0].issuessses;
     var id = req.query.id;
-    res.render("issues", { data, id });
+    res.render("issues", { issues, data, id });
   } else {
     res.redirect("/login");
   }

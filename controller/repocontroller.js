@@ -67,20 +67,18 @@ let repocreate = async (req, res, next) => {
   //   return res.render("index", { errormsg });
   // }
   // console.log("decoded", decoded);
-  res.render("createrepo");
+  const token = req.headers.cookie;
+  if (token) {
+    res.render("createrepo");
+  } else {
+    res.redirect("/login");
+  }
 };
 
 let dashboard = async (req, res) => {
   const token = req.headers.cookie;
-  // const expectedToken = cookie.jwt;
-  // console.log("expectedToken", expectedToken);
-  // if (token !== expectedToken) {
-  //   const errormsg = "Invalid token";
-  //   return res.render("index", { errormsg });
-  // } else {
-  //   console.log("success");
-  // }
-  console.log("token in token........", token);
+  
+  console.log("token in token.dash.......", token);
   if (token) {
     res.render("dashboard");
   } else {
@@ -98,18 +96,19 @@ let repolist = async (req, res, next) => {
   );
   console.log("user.id", user.id);
   const uid = user.id;
+
   try {
-    await Repository.create({
-      name: req.body.name,
-      description: req.body.description,
-      isPublic: req.body.isPublic,
-      privateValue: req.body.privateValue,
-      userId: uid,
-    });
-    res.redirect("/dashboard");
+      await Repository.create({
+        name: req.body.name,
+        description: req.body.description,
+        isPublic: req.body.isPublic,
+        privateValue: req.body.privateValue,
+        userId: uid,
+      });
+      res.redirect("/dashboard");
   } catch (err) {
     console.log("error while creating repo", err);
-    res.status(500).send("error while creating repo");
+    // res.status(500).send("error while creating repo");
   }
 };
 let repodelete = async (req, res) => {
@@ -151,7 +150,7 @@ let tabs = async (req, res, next) => {
         console.log("hello lkhj");
         res.render("threetabs", { repository });
       } else {
-        res.status(404).send("Repository not found");
+        // res.status(404).send("Repository not found");
       }
       console.log("repository<<<", repository);
     } else {
@@ -159,7 +158,7 @@ let tabs = async (req, res, next) => {
     }
   } catch (err) {
     console.log("retriving error", err);
-    res.status(500).send("error retriewing");
+    // res.status(500).send("error retriewing");
   }
 };
 let repoissu = async (req, res, next) => {
@@ -206,7 +205,7 @@ let searchrepo = async (req, res) => {
       "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     );
     console.log(err.message);
-    res.status(500).json({ error: "server error" });
+    // res.status(500).json({ error: "server error" });
   }
 };
 let pagecollabs = async (req, res) => {
@@ -246,7 +245,7 @@ let tabs2 = async (req, res) => {
         console.log("hello lkhj");
         res.render("three2", { repository });
       } else {
-        res.status(404).send("Repository not found");
+        // res.status(404).send("Repository not found");
       }
       console.log("repository<<<", repository);
     } else {
@@ -254,7 +253,7 @@ let tabs2 = async (req, res) => {
     }
   } catch (err) {
     console.log("retriving error", err);
-    res.status(500).send("error retriewing");
+    // res.status(500).send("error retriewing");
   }
 };
 module.exports = {

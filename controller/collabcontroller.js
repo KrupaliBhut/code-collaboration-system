@@ -56,6 +56,8 @@ let collab = async (req, res) => {
         include: [
           {
             model: Collabs,
+            required: true,
+            on: Sequelize.literal("NOT users.id= collas.userId"),
           },
         ],
       });

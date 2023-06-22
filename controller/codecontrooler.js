@@ -130,11 +130,12 @@ let codedata = async (req, res) => {
         model: File,
       },
     });
+
     console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
     // console.log("filessss<", issues[0].files[0].id);
     var datacode = issues[0].files;
     var id = req.query.id;
-    res.render("code", { datacode, id });
+    res.render("code", {issues, datacode, id });
   } else {
     res.redirect("/login");
   }
