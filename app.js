@@ -32,6 +32,7 @@ app.use("/", authe2, collab);
 // });
 app.all("*", authe2);
 // app.get("*", (req, res, next) => {
+//   const path = req.originalUrl;
 //   const err = new Error("Can not find ${req.originalUrl} on the server");
 //   err.status = "fail";
 //   err.statusCode = 404;
@@ -45,6 +46,9 @@ app.all("*", authe2);
 //     message: err.message,
 //   });
 //   // res.status(490).json({ message: err.message });
+// });
+// app.use((req, res, next) => {
+//   res.status(404).send("404 - Page Not Found");
 // });
 app.listen(3001, () => {
   console.log(`Server is Running on 3000`);

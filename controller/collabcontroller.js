@@ -32,8 +32,11 @@ let pagecollabs = async (req, res) => {
     });
     console.log("coid???????????????????", coid);
     // console.log("coid???????????????????", coid);
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
 
-    res.render("collab", { id, coid });
+    res.render("collab", { repository, id, coid });
   } else {
     res.redirect("/login");
   }
@@ -131,8 +134,10 @@ let pagecollabs2 = async (req, res) => {
       ],
     });
     console.log("coid???????????????????", coid);
-
-    res.render("collab2", { id, coid });
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
+    res.render("collab2", { repository, id, coid });
   } else {
     res.redirect("/login");
   }

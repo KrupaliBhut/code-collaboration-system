@@ -26,11 +26,45 @@
     </style>
   </head>
   <body>
-    <nav id ="navbtn">
-      <a type="button" href="/logout" class="btn btn-primary"> Logout</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                href="/codedata?id=<%=repository.id%>"
+                >Code</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/issueData?id=<%=repository.id%>"
+                >Issues</a
+              >
+              Issues
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pagecollabs?id=<%=repository.id%>"
+                >Collaborators</a
+              >
+            </li>
+
+            <!-- <li class="nav-item .me-5">
+                <a class="nav-link" href='#'>Logout</a>
+              </li> -->
+          </ul>
+        </div>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" id="logoutbtn">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-        
-  
+    <% console.log(repository.id)%>
+    <input type="text" value="<%=repository.id%>" hidden />
+
     <a type="button" href="/tabs/<%=id%>" class="btn btn-primary">
       Back</a>
     <div class="input-group">
@@ -71,7 +105,8 @@
     alert("not deleted");
   }
   window.location.reload()
-       }
+  window.assign(`/pagecollabs?id=${repositoryId}`)
+       }    
     async function change(name) {
 var div_ele = document.getElementById('new');
 var user = name.value;

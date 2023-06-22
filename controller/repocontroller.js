@@ -77,7 +77,7 @@ let repocreate = async (req, res, next) => {
 
 let dashboard = async (req, res) => {
   const token = req.headers.cookie;
-  
+
   console.log("token in token.dash.......", token);
   if (token) {
     res.render("dashboard");
@@ -98,14 +98,14 @@ let repolist = async (req, res, next) => {
   const uid = user.id;
 
   try {
-      await Repository.create({
-        name: req.body.name,
-        description: req.body.description,
-        isPublic: req.body.isPublic,
-        privateValue: req.body.privateValue,
-        userId: uid,
-      });
-      res.redirect("/dashboard");
+    await Repository.create({
+      name: req.body.name,
+      description: req.body.description,
+      isPublic: req.body.isPublic,
+      privateValue: req.body.privateValue,
+      userId: uid,
+    });
+    res.redirect("/dashboard");
   } catch (err) {
     console.log("error while creating repo", err);
     // res.status(500).send("error while creating repo");

@@ -20,13 +20,14 @@ const {
 } = require("../controller/repocontroller");
 const validateUser = require("../middleware/authtoken");
 
-router.route("/repos").get(repos);
+// router.route("/repos").get(repos);
+router.get("/repos", authenticateUser, repos);
 
 // router.route("/repocreate", authenticateUser).get(repocreate);
 router.route("/repolist", authenticateUser).post(repolist);
 // router.route("/repodelete/:id").delete(repodelete);
 router.route("/repodelete", authenticateUser).get(repodelete);
-router.route("/pagecollabss", authenticateUser).get(pagecollabs);
+// router.route("/pagecollabss", authenticateUser).get(pagecollabs);
 router.route("/extra").get(extra);
 // router.route("/tabs/:id").get(tabs);
 router.route("/tabs2/:id").get(tabs2);
@@ -37,5 +38,6 @@ router.get("/repocreate", authenticateUser, repocreate);
 router.get("/dashboard", authenticateUser, dashboard);
 router.post("/repolist", authenticateUser, repolist);
 router.get("/tabs/:id", authenticateUser, tabs);
+router.get("/pagecollabss", authenticateUser, pagecollabs);
 
 module.exports = router;

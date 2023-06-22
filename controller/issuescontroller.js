@@ -4,6 +4,7 @@ var db = require("../models/index");
 const { render } = require("ejs");
 const { json } = require("body-parser");
 const { login } = require("./usercontroller");
+const { title } = require("process");
 const Issues = db.issues;
 const Collabs = db.collabs;
 const Repository = db.repositorys;
@@ -181,8 +182,12 @@ let issueData = async (req, res) => {
     console.log("???????????issuesshow ", issues);
 
     var data = issues[0].issuessses;
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
+
     var id = req.query.id;
-    res.render("issues", { issues, data, id });
+    res.render("issues", { repository, issues, data, id });
   } else {
     res.redirect("/login");
   }
@@ -318,8 +323,42 @@ let issueData2 = async (req, res) => {
       include: [{ model: Issues }],
     });
     var data = issues[0].issuessses;
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
     var id = req.query.id;
-    res.render("issues2", { data, id });
+    res.render("issues2", { repository,data, id });
+  } else {
+    res.redirect("/login");
+  }
+};
+let searchissue = async (req, res) => {
+  var tokens = req.headers.cookie;
+
+  if (tokens) {
+    console.log("<<", req.header);
+    const token = req.headers.cookie;
+    console.log("token", token);
+    const user = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64").toString("utf-8")
+    );
+    console.log("user<<<<", user);
+    console.log("user.id", user.id);
+    const uid = user.id;
+    const issues = await Repository.findAll({
+      where: { userId: uid, id: req.query.id },
+      include: [{ model: Issues, include: [Labels] }],
+    });
+
+    console.log("???????????issuesshow ", issues);
+
+    var data = issues[0].issuessses;
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
+
+    var id = req.query.id;
+    res.render("issues", { repos: issues, data, id });
   } else {
     res.redirect("/login");
   }
@@ -337,4 +376,5 @@ module.exports = {
   label,
   check,
   issueData2,
+  searchissue,
 };

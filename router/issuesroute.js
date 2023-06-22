@@ -12,7 +12,7 @@ const {
   tabss,
   issueData,
   check,
-  issueData2,
+  issueData2,searchissue
 } = require("../controller/issuescontroller");
 
 // router.route("/renderissues").get(renderissues);
@@ -36,4 +36,7 @@ router.get("/issueData2", authenticateUser, issueData2);
 router.get("/issue", authenticateUser, issue);
 router.post("/issues", authenticateUser, editissue).post(editissue);
 router.post("/createissues", authenticateUser, issues);
+searchissue;
+router.get("/searchissue", authenticateUser, searchissue);
+
 module.exports = router;

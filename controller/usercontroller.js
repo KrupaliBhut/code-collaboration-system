@@ -87,10 +87,6 @@ let login = async (req, res, next) => {
 
     const token = jwt.sign({ id: user.id }, "krupali");
     console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", token);
-    // if (!token) {
-    //   return res.status(404).send("Invalid token");
-    // }
-    // next();
     res.cookie("token", token, {});
 
     // res.json({ token });

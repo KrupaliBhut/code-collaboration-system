@@ -123,7 +123,6 @@ let codedata = async (req, res) => {
     );
     console.log("user.id", user.id);
     const uid = user.id;
-
     const issues = await Repository.findAll({
       where: { userId: uid, id: req.query.id },
       include: {
@@ -134,8 +133,11 @@ let codedata = async (req, res) => {
     console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
     // console.log("filessss<", issues[0].files[0].id);
     var datacode = issues[0].files;
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
     var id = req.query.id;
-    res.render("code", {issues, datacode, id });
+    res.render("code", {repository,issues, datacode, id });
   } else {
     res.redirect("/login");
   }
@@ -163,8 +165,11 @@ let codedata2 = async (req, res) => {
     console.log("issue<>>>>>>>>>>>>>>>>>>>>>>>>>>>>", issues);
     // console.log("filessss<", issues[0].files[0].id);
     var datacode = issues[0].files;
+    const repository = await Repository.findOne({
+      where: { id: req.query.id },
+    });
     var id = req.query.id;
-    res.render("code2", { datacode, id });
+    res.render("code2", {repository, datacode, id });
   } else {
     res.redirect("/login");
   }
